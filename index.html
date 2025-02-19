@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratham-iportfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(0, 0, 33);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80px;
+            background-color: rgb(18, 18, 62);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            list-style: none;
+            margin: 0 23px;
+            ;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul li a:hover {
+            color: rgb(153, 153, 226);
+            font-size: 1.01rem;
+        }
+
+        main hr {
+            border: 0;
+            background: #9c97f1;
+            height: 1.2px;
+            margin: 60px 84px;
+        }
+
+        .left {
+            font-size: 1.5rem;
+        }
+
+        .firstSection {
+            display: flex;
+            justify-content: space-around;
+            align-content: center;
+            margin: 130px 0;
+        }
+
+        .firstSection>div {
+            width: 25%;
+        }
+
+        .leftSection {
+            font-size: 3rem;
+        }
+
+        .leftSection .buttons {
+            padding: 50px 0;
+        }
+
+        .leftSection .btn {
+            padding: 12px;
+            background: #1e2167;
+            color: white;
+            border: 2px solid white;
+            border-radius: 6px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .rightSection img {
+            width: 100%;
+            margin: 50 px 0;
+        }
+
+        .purple {
+            color: rgb(170, 107, 228);
+        }
+
+        .text-grey {
+            color: grey;
+        }
+
+        #element {
+            color: rgb(170, 107, 228);
+        }
+
+        .secondSection {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .secondSection .text-grey {
+            display: block;
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .secondSection h1 {
+            text-align: center;
+            width: 100%;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3.5rem;
+            justify-items: center;
+            margin: 0 1rem;
+        }
+
+        .vertical {
+            width: 100%;
+            max-width: 280px;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: rgba(28, 28, 64, 0.5);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .vertical:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-tags {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tags span {
+            background: #1e2167;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+
+
+
+        .image-top {
+            width: 40px;
+            position: relative;
+            top: 0;
+            left: 0;
+            margin-bottom: 1.5rem;
+            z-index: 1;
+        }
+
+        .vertical-title {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            width: 100%;
+            position: static;
+        }
+
+        .vertical-desc {
+            color: grey;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            width: 100%;
+            position: static;
+        }
+
+        footer {
+            background-color: #1a1a2e;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 3px double #9c97f1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            column-count: 3;
+            column-gap: 2rem;
+        }
+
+        .footer-section {
+            break-inside: avoid;
+            margin-bottom: 2rem;
+        }
+
+        .footer-headline {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            color: #9c97f1;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #9c97f1;
+            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .footer-article {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-byline {
+            font-style: italic;
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #2a2a40;
+            font-family: 'Poppins', sans-serif;
+            column-span: all;
+        }
+
+        .buttons a.btn {
+            display: inline-block;
+            padding: 12px;
+            background: #1e2167;
+            color: white;
+            border: 2px solid white;
+            border-radius: 6px;
+            font-size: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .buttons a.btn:hover {
+            background: #9c97f1;
+            transform: translateY(-2px);
+        }
+
+        @media screen and (max-width: 768px) {
+            .box {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .vertical {
+                margin: 1rem 0;
+                padding: 1.2rem;
+            }
+
+            .firstSection {
+                flex-direction: column;
+                text-align: center;
+                margin: 60px 0;
+            }
+
+            .leftSection,
+            .rightSection {
+                width: 100% !important;
+            }
+
+            .rightSection img {
+                width: 70%;
+                margin-top: 2rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .secondSection {
+                padding: 2rem 0;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            .leftSection {
+                width: 100% !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .secondSection {
+                max-width: 80vw;
+                margin: auto;
+                height: 141vh;
+            }
+
+            .rightSection img {
+                width: 80% !important;
+            }
+
+            .image-top {
+                left: 0;
+                transform: none;
+                margin-left: -1rem;
+            }
+
+            .secondSection {
+                height: auto !important;
+                padding: 2rem 1rem !important;
+            }
+
+            body {
+                min-width: fit-content;
+            }
+
+            .footer-content {
+                column-count: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 0 1rem;
+            }
+
+            .footer-section {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section ul {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            main {
+                flex: 1;
+            }
+
+            @media (max-width: 480px) {
+                nav ul {
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                    padding: 1rem;
+                }
+
+                .leftSection {
+                    font-size: 2.5rem !important;
+                    padding: 0 1rem;
+                }
+
+                .buttons a.btn {
+                    margin: 0.5rem 0;
+                }
+
+                footer {
+                    padding: 2rem 1rem !important;
+                }
+
+                .footer-bottom {
+                    padding: 1rem !important;
+                }
+
+                .vertical {
+                    padding: 1rem;
+                }
+
+                .vertical-title {
+                    font-size: 1rem;
+                }
+
+                .vertical-desc {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left">Pratham's Portfolio</div>
+            <div class="right">
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Services</a></li>
+                    <li><a href="">Projects</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="firstSection">
+            <div class="leftSection">
+                <div>
+                    Hi, My name is
+                </div>
+                <span class="purple">Pratham</span>
+
+                <div>And I am a</div>
+                <span id="element"></span>
+                <div class="buttons">
+                    <a href="resume.png" download class="btn">Download Resume</a>
+                    <a href="https://github.com/Pratham-ji" class="btn" target="_blank">Visit GitHub</a>
+                </div>
+            </div>
+            <div class="rightSection">
+                <img src="bg.png" alt=""></img>
+            </div>
+        </section>
+        <hr>
+        <section class="secondSection">
+            <span class="text-grey">My Development Milestones</span>
+            <h1>Project Portfolio</h1>
+            <div class="box">
+                <!-- Project 1 -->
+                <div class="vertical">
+                    <img class="image-top" src="react.svg" alt="React">
+                    <div class="vertical-title">
+                        Digital Tribute Chronicle
+                    </div>
+                    <div class="vertical-desc">
+                        My React Journey! Created during first semester with dynamic components,
+                        interactive galleries, and smooth transitions. Conquered state management
+                        and component architecture.
+                        <div class="tech-tags">
+                            <span>React</span>
+                            <span>JSX</span>
+                            <span>CSS3</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="vertical">
+                    <img class="image-top" src="c.png" alt="C Language">
+                    <div class="vertical-title">
+                        Workforce Hub
+                    </div>
+                    <div class="vertical-desc">
+                        Console-based employee management system with file handling and
+                        linked lists. 800+ lines of pure C mastery that solidified my
+                        understanding of core programming concepts.
+                        <div class="tech-tags">
+                            <span>C Language</span>
+                            <span>File I/O</span>
+                            <span>Data Structures</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="vertical">
+                    <img class="image-top" src="js.png" alt="JavaScript">
+                    <div class="vertical-title">
+                        Web Craft Laboratory
+                    </div>
+                    <div class="vertical-desc">
+                        Collection of interactive web experiments including college review
+                        systems and project management dashboards. My frontend playground
+                        for mastering DOM manipulation.
+                        <div class="tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="vertical">
+                    <img class="image-top" src="py.png" alt="Python">
+                    <div class="vertical-title">
+                        SHORT - AI Companion
+                    </div>
+                    <div class="vertical-desc">
+                        Evolving AI assistant prototype integrating natural language processing
+                        with Flask backend. Currently implements voice commands and
+                        smart home simulations.
+                        <div class="tech-tags">
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>APIs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Me</h3>
+                <p>Email: prathamraj2409@gmail.com</p>
+                <p>Phone: +91 8077910620</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Pratham's Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <!-- Setup and start animation! -->
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['Web Developer!', 'Web Designer!', 'Software Developer!'],
+            typeSpeed: 50,
+        });
+    </script>
+</body>
+
+</html>
