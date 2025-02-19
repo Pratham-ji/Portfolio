@@ -15,6 +15,11 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+            /* Enable smooth scrolling */
+        }
+
         body {
             background-color: rgb(0, 0, 33);
             color: white;
@@ -29,6 +34,11 @@
             align-items: center;
             height: 80px;
             background-color: rgb(18, 18, 62);
+            position: sticky;
+            /* Make navbar sticky */
+            top: 0;
+            z-index: 100;
+            /* Ensure it stays on top */
         }
 
         nav ul {
@@ -39,12 +49,13 @@
         nav ul li {
             list-style: none;
             margin: 0 23px;
-            ;
         }
 
         nav ul li a {
             text-decoration: none;
             color: white;
+            transition: color 0.3s ease;
+            /* Smooth color transition on hover */
         }
 
         nav ul li a:hover {
@@ -80,6 +91,12 @@
 
         .leftSection .buttons {
             padding: 50px 0;
+            display: flex;
+            /* Add display flex to buttons */
+            gap: 20px;
+            /* Add gap between buttons */
+            justify-content: flex-start;
+            /* Align buttons to the start */
         }
 
         .leftSection .btn {
@@ -90,6 +107,17 @@
             border-radius: 6px;
             font-size: 20px;
             cursor: pointer;
+            transition: background-color 0.3s ease, color: 0.3s ease;
+            /* Button hover transition */
+            text-decoration: none;
+            /* Ensure no underline if using <a> tag */
+            display: inline-block;
+            /* To allow margin on all sides if needed */
+        }
+
+        .leftSection .btn:hover {
+            background-color: #9c97f1;
+            color: black;
         }
 
         .rightSection img {
@@ -109,24 +137,122 @@
             color: rgb(170, 107, 228);
         }
 
+        /* About Section Styles */
+        .aboutSection {
+            color: white;
+            padding: 4rem 2rem;
+            background-color: rgb(0, 0, 50);
+            /* Slightly darker background */
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #9c97f1;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #ddd;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .skill-box {
+            background: #1e2167;
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Services Section Styles */
+        .servicesSection {
+            padding: 4rem 1rem;
+            /* Updated - Matching Projects Section padding */
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-box {
+            background: rgba(28, 28, 64, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-box i {
+            font-size: 2.5rem;
+            color: #9c97f1;
+            margin-bottom: 1rem;
+        }
+
+        .service-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: white;
+        }
+
+        .service-box p {
+            font-size: 1rem;
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+
         .secondSection {
             max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 1rem;
         }
 
-        .secondSection .text-grey {
+        .secondSection .text-grey,
+        .servicesSection .text-grey {
+            /* Combined rule for both sections' sub-headings */
             display: block;
             text-align: center;
             font-size: 1.2rem;
             margin-bottom: 1rem;
+            color: grey;
         }
 
-        .secondSection h1 {
+        .secondSection h1,
+        .servicesSection h1 {
+            /* Combined rule for both sections' headings */
             text-align: center;
             width: 100%;
             font-size: 2.5rem;
             margin-bottom: 3rem;
+            display: block;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: normal;
+            font-family: 'Poppins', sans-serif;
+            color: white;
         }
 
         .box {
@@ -194,36 +320,64 @@
 
         footer {
             background-color: #1a1a2e;
-            padding: 2rem 0;
+            padding: 2.5rem 0;
+            /* Updated - increased padding top/bottom slightly */
             margin-top: 4rem;
             border-top: 3px double #9c97f1;
+            /* background-color: #161626; Optional: slightly darker footer background if needed */
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
-            column-count: 3;
-            column-gap: 2rem;
+            display: flex;
+            /* Updated - Using Flexbox for layout */
+            justify-content: space-between;
+            /* Updated - Distribute sections evenly */
+            align-items: flex-start;
+            /* Updated - Align items to the start at the top */
         }
 
         .footer-section {
             break-inside: avoid;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
+            /* Updated - Removed margin-bottom to control vertical space via padding in footer-content if needed */
+            flex: 1;
+            /* Updated - Equal width distribution */
+            padding: 0 1rem;
+            /* Updated - Add horizontal padding within each section */
         }
+
+        .footer-section ul li {
+            margin-bottom: 0.6rem;
+            /* Adjust this value to control vertical spacing */
+        }
+
+        .footer-section ul li a:hover {
+            color: #fff;
+            text-decoration: underline;
+            /* Added underline on hover */
+        }
+
+        /* Remove column-count and column-gap, as we are using Flexbox now */
+        /*  column-count: 3;     */
+        /*  column-gap: 2rem;     */
+
 
         .footer-headline {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #9c97f1;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #9c97f1;
-            padding-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0;
             text-transform: uppercase;
+            font-weight: 500;
         }
 
         .footer-article {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+            /* Updated - Slightly reduced margin */
             font-size: 0.9rem;
             line-height: 1.6;
         }
@@ -243,162 +397,454 @@
             column-span: all;
         }
 
-        .buttons a.btn {
-            display: inline-block;
-            padding: 12px;
-            background: #1e2167;
-            color: white;
-            border: 2px solid white;
-            border-radius: 6px;
-            font-size: 20px;
-            cursor: pointer;
-            text-decoration: none;
-            margin: 0 10px;
-            transition: all 0.3s ease;
+
+        .social-links {
+            margin-top: 0.8rem;
+            /* Updated - Adjusted margin */
+            display: flex;
+            /* Updated - Flexbox for horizontal icon layout */
+            justify-content: flex-start;
+            /* Updated - Align icons to the start */
+            gap: 1rem;
+            /* Updated - Spacing between icons */
         }
 
-        .buttons a.btn:hover {
-            background: #9c97f1;
-            transform: translateY(-2px);
+        .social-links a {
+            color: #9c97f1;
+            /* Updated - Icon color */
+            font-size: 1.2rem;
+            /* Updated - Slightly larger icons */
+            transition: color 0.3s ease;
         }
+
+        .social-links a:hover {
+            color: white;
+            /* Updated - Icon color on hover */
+        }
+
 
         @media screen and (max-width: 768px) {
-            .box {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-                margin: 0 auto;
-            }
-
-            .vertical {
-                margin: 1rem 0;
-                padding: 1.2rem;
+            body {
+                margin: 0;
+                /* Ensure body takes full viewport width */
             }
 
             .firstSection {
                 flex-direction: column;
                 text-align: center;
-                margin: 60px 0;
+                margin: 80px 0 60px 0;
+                /* Adjusted top margin, reduced bottom margin */
             }
 
-            .leftSection,
-            .rightSection {
-                width: 100% !important;
-            }
-
-            .rightSection img {
-                width: 70%;
-                margin-top: 2rem;
-            }
-
-            .buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .secondSection {
-                padding: 2rem 0;
-            }
-
-            nav {
-                flex-direction: column;
+            .firstSection>div {
+                width: 100%;
+                /* Full width for mobile */
             }
 
             .leftSection {
-                width: 100% !important;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+                font-size: 2rem;
+                /* Adjusted font size for mobile */
+                padding: 0 20px;
+                /* Add horizontal padding for text readability */
             }
 
-            .secondSection {
-                max-width: 80vw;
-                margin: auto;
-                height: 141vh;
+            .leftSection .buttons {
+                flex-direction: column;
+                /* Stack buttons on mobile */
+                align-items: center;
+                /* Center buttons horizontally */
+                padding: 30px 0;
+                /* Adjusted padding */
+                gap: 10px;
+                /* Reduced gap between stacked buttons */
+                justify-content: center;
+                /* Center buttons in the section */
+            }
+
+            .leftSection .btn {
+                font-size: 1.1rem;
+                /* Adjusted button font size for mobile */
+                padding: 10px 20px;
+                /* Adjusted button padding */
+                width: auto;
+                /* Let button width adjust to content */
+                text-align: center;
+                /* Center text in buttons */
+                display: block;
+                /* Stack buttons on new lines */
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+
+            .rightSection {
+                width: 100%;
+                /* Full width for image container */
+                display: flex;
+                justify-content: center;
+                /* Center image horizontally */
             }
 
             .rightSection img {
-                width: 80% !important;
+                width: 75%;
+                /* Slightly reduce image size on mobile */
+                margin-top: 1rem;
+            }
+
+            main hr {
+                margin: 40px 30px;
+                /* Adjusted hr margins for mobile */
+            }
+
+            /* About Section */
+            .aboutSection {
+                padding: 3rem 1.5rem;
+                /* Reduced padding for smaller screens */
+            }
+
+            .about-content h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .about-content p {
+                font-size: 1rem;
+            }
+
+            .skills-container {
+                margin-top: 1.5rem;
+            }
+
+            .skill-box {
+                font-size: 0.8rem;
+                padding: 0.6rem 1rem;
+            }
+
+            /* Services Section */
+            .servicesSection {
+                padding: 3rem 1rem;
+                /* Reduced padding for mobile */
+            }
+
+            .servicesSection h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .servicesSection .text-grey {
+                font-size: 1rem;
+            }
+
+            .services-container {
+                grid-template-columns: 1fr;
+                /* Single column for services on mobile */
+                gap: 1.5rem;
+                /* Adjusted gap */
+                padding: 0 20px;
+                /* Add horizontal padding */
+            }
+
+            .service-box {
+                padding: 1.5rem;
+            }
+
+            .service-box i {
+                font-size: 2rem;
+                margin-bottom: 0.7rem;
+            }
+
+            .service-box h3 {
+                font-size: 1.3rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .service-box p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+
+            /* Projects Section (secondSection) */
+            .secondSection {
+                padding: 3rem 1rem;
+                /* Reduced padding for mobile */
+            }
+
+            .secondSection h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .secondSection .text-grey {
+                font-size: 1rem;
+            }
+
+            .box {
+                grid-template-columns: 1fr;
+                /* Single column for projects on mobile */
+                gap: 2rem;
+                /* Adjusted gap */
+                padding: 0 20px;
+                /* Add horizontal padding */
+            }
+
+            .vertical {
+                padding: 1.2rem;
+                max-width: 100%;
+                /* Full width vertical boxes */
             }
 
             .image-top {
-                left: 0;
-                transform: none;
-                margin-left: -1rem;
+                width: 35px;
+                /* Slightly smaller image icons in projects */
+                margin-bottom: 1rem;
             }
 
-            .secondSection {
-                height: auto !important;
-                padding: 2rem 1rem !important;
+            .vertical-title {
+                font-size: 1.1rem;
+                margin: 0.8rem 0;
             }
 
-            body {
-                min-width: fit-content;
+            .vertical-desc {
+                font-size: 0.9rem;
+            }
+
+            .tech-tags {
+                margin-top: 0.8rem;
+                gap: 0.4rem;
+            }
+
+            .tech-tags span {
+                font-size: 0.75rem;
+                padding: 0.25rem 0.7rem;
+            }
+
+
+            /* Footer */
+            footer {
+                padding: 2rem 0;
+                /* Reduced footer padding */
+                margin-top: 3rem;
+                /* Reduced margin top */
             }
 
             .footer-content {
-                column-count: 1;
-                display: flex;
                 flex-direction: column;
+                /* Stack footer sections */
                 align-items: center;
+                /* Center align sections */
                 text-align: center;
+                /* Center text within sections */
                 padding: 0 1rem;
+                /* Maintain horizontal padding */
             }
 
             .footer-section {
+                padding: 1.5rem 0;
+                /* Add vertical padding between footer sections */
+                margin-bottom: 0;
+                /* Remove margin-bottom from footer sections as they are stacked */
                 width: 100%;
-                max-width: 300px;
-                margin-bottom: 2rem;
+                /* Footer sections take full width */
+                max-width: 100%;
+                /* Remove max-width limit for full-width sections */
+            }
+
+
+            .footer-headline {
+                font-size: 1rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .footer-article,
+            .footer-byline,
+            .footer-section ul li a {
+                font-size: 0.85rem;
+            }
+
+            .footer-section:nth-child(2) .footer-headline {
+                text-align: center;
+                /* Center the headline text */
             }
 
             .footer-section ul {
                 display: flex;
+                /* Changed to flexbox */
                 flex-direction: column;
+                /* Stack list items vertically */
                 align-items: center;
+                /* Center items horizontally within the ul */
+                text-align: center;
+                /* Center text content within list items */
+                padding-left: 0;
+                /* Remove left padding that was for bullets */
+                list-style-type: none;
+                /* Optionally remove bullets if centering links, otherwise keep or adjust list-style-position */
             }
 
-            main {
-                flex: 1;
+
+            .footer-section ul li {
+                margin-bottom: 0.5rem;
+                list-style-type: none;
+                /* Removed bullets since links will be centered */
+                display: list-item;
+                /* Keep display as list-item */
+                text-align: center;
+                /* Center text in list items */
             }
 
-            @media (max-width: 480px) {
-                nav ul {
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                    padding: 1rem;
-                }
+            .social-links {
+                justify-content: center;
+                /* Center social links in footer on mobile */
+                margin-top: 0.6rem;
+                gap: 1.2rem;
+                /* Adjusted gap for social icons in footer */
+            }
 
-                .leftSection {
-                    font-size: 2.5rem !important;
-                    padding: 0 1rem;
-                }
+            .social-links a {
+                font-size: 1.3rem;
+                /* Adjusted size of social icons in footer */
+            }
 
-                .buttons a.btn {
-                    margin: 0.5rem 0;
-                }
+            .footer-bottom {
+                padding-top: 1.5rem;
+                /* Reduced padding top */
+                margin-top: 1.5rem;
+                /* Reduced margin top */
+            }
 
-                footer {
-                    padding: 2rem 1rem !important;
-                }
+            nav {
+                flex-direction: column;
+                /* Stack nav items on mobile */
+                height: auto;
+                /* Adjust height automatically */
+                padding: 15px 0;
+                /* Add vertical padding to navbar */
+                align-items: center;
+                /* Center items in nav bar */
+            }
 
-                .footer-bottom {
-                    padding: 1rem !important;
-                }
+            nav .left {
+                font-size: 1.3rem;
+                /* Adjusted nav logo size */
+                margin-bottom: 10px;
+                /* Space between logo and nav links */
+            }
 
-                .vertical {
-                    padding: 1rem;
-                }
+            nav ul {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                /* Stack nav links */
+                align-items: center;
+                /* Center nav links horizontally */
+                margin-top: 0;
+                /* Remove top margin */
+                padding: 0;
+                /* Reset padding for nav ul */
+                gap: 25px;
+            }
 
-                .vertical-title {
-                    font-size: 1rem;
-                }
+            nav ul li {
+                list-style: none;
+                margin: 0 23px;
+                /* Vertical space for stacked nav links */
+                margin-left: 0;
+                /* Remove left margin */
+                margin-right: 0;
+                /* Remove right margin */
+            }
 
-                .vertical-desc {
-                    font-size: 0.8rem;
-                }
+            nav ul li a {
+                font-size: 1rem;
+                /* Adjusted nav link font size */
+            }
+
+
+        }
+
+        @media (max-width: 480px) {
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            /* Further adjustments for very small screens */
+            .leftSection {
+                font-size: 1.7rem;
+                /* Further reduce hero title font size */
+            }
+
+            .leftSection .btn {
+                font-size: 1rem;
+                /* Further reduce button font size for very small screens */
+                padding: 8px 16px;
+                /* Slightly reduce button padding */
+            }
+
+            .rightSection img {
+                width: 90%;
+                /* Make image a bit larger again on very small screens if needed */
+            }
+
+            .about-content h2 {
+                font-size: 1.8rem;
+                /* Further reduce about heading size */
+            }
+
+            .about-content p {
+                font-size: 0.95rem;
+                /* Further reduce about text size */
+            }
+
+            .servicesSection h1 {
+                font-size: 1.8rem;
+                /* Further reduce services heading size */
+            }
+
+            .service-box h3 {
+                font-size: 1.2rem;
+                /* Further reduce service box heading size */
+            }
+
+            .service-box p {
+                font-size: 0.85rem;
+                /* Further reduce service box text size */
+            }
+
+            .secondSection h1 {
+                font-size: 1.8rem;
+                /* Further reduce projects heading size */
+            }
+
+            .vertical-title {
+                font-size: 1rem;
+                /* Further reduce project title size */
+            }
+
+            .vertical-desc {
+                font-size: 0.85rem;
+                /* Further reduce project description size */
+            }
+
+            .footer-headline {
+                font-size: 0.9rem;
+                /* Further reduce footer headline size */
+            }
+
+            .footer-article,
+            .footer-byline,
+            .footer-section ul li a {
+                font-size: 0.8rem;
+                /* Further reduce footer text size */
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -407,17 +853,17 @@
             <div class="left">Pratham's Portfolio</div>
             <div class="right">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Projects</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
-        <section class="firstSection">
+        <section class="firstSection" id="home">
             <div class="leftSection">
                 <div>
                     Hi, My name is
@@ -427,7 +873,8 @@
                 <div>And I am a</div>
                 <span id="element"></span>
                 <div class="buttons">
-                    <a href="resume.png" download class="btn">Download Resume</a>
+                    <a href="https://drive.google.com/drive/u/2/folders/1yEnvqLvitRID9_yubNAhXzWaxiDMC2LF" download
+                        class="btn"> Google Drive</a>
                     <a href="https://github.com/Pratham-ji" class="btn" target="_blank">Visit GitHub</a>
                 </div>
             </div>
@@ -436,7 +883,71 @@
             </div>
         </section>
         <hr>
-        <section class="secondSection">
+
+        <section id="about" class="aboutSection">
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>
+                    Hello! I'm Pratham, a passionate and aspiring web developer and designer. I'm currently exploring
+                    the exciting world of technology and building a strong foundation in software development. My
+                    journey has just begun, but I'm eager to learn, grow, and create impactful digital experiences.
+                </p>
+                <p>
+                    I have a keen interest in front-end technologies like HTML, CSS, and JavaScript, and I'm also diving
+                    into back-end development with Python and Flask. I enjoy problem-solving and crafting clean,
+                    efficient code. My goal is to become a versatile full-stack developer, contributing to innovative
+                    projects and making a difference in the tech industry.
+                </p>
+                <p>
+                    Looking towards the future, I am particularly fascinated by emerging fields like Quantum Computing
+                    and Quantum Machine Learning. I'm excited to delve deeper into these areas, understanding their
+                    potential to revolutionize computation and problem-solving. I aspire to contribute to these
+                    cutting-edge domains as my journey progresses.
+                </p>
+                <div class="skills-container">
+                    <span class="skill-box">HTML5</span>
+                    <span class="skill-box">CSS3</span>
+                    <span class="skill-box">JavaScript</span>
+                    <span class="skill-box">React</span>
+                    <span class="skill-box">Python</span>
+                    <span class="skill-box">Flask</span>
+                    <span class="skill-box">C Language</span>
+                    <span class="skill-box">Git</span>
+                    <span class="skill-box">GitHub</span>
+                    <span class="skill-box">C++</span>
+                    <span class="skill-box">Java</span>
+                </div>
+            </div>
+        </section>
+        <hr>
+
+        <section id="services" class="servicesSection">
+            <div class="text-grey">What I Offer</div>
+            <h1>Services</h1>
+            <div class="services-container">
+                <div class="service-box">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Crafting responsive and user-friendly websites using the latest web technologies. From static
+                        landing pages to dynamic web applications, I bring your digital ideas to life.</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-palette"></i>
+                    <h3>Web Design</h3>
+                    <p>Creating visually appealing and intuitive web designs. Focusing on user experience (UX) and user
+                        interface (UI) to ensure your website not only looks great but also functions seamlessly.</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-drafting-compass"></i>
+                    <h3>UI/UX Design</h3>
+                    <p>Designing interfaces that are both beautiful and functional. I specialize in creating
+                        user-centered designs that enhance usability and engagement.</p>
+                </div>
+            </div>
+        </section>
+        <hr>
+
+        <section id="projects" class="secondSection">
             <span class="text-grey">My Development Milestones</span>
             <h1>Project Portfolio</h1>
             <div class="box">
@@ -515,30 +1026,30 @@
         </section>
     </main>
 
-    <footer>
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Contact Me</h3>
                 <p>Email: prathamraj2409@gmail.com</p>
                 <p>Phone: +91 8077910620</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/Pratham-ji"><i class="fab fa-github"></i></a>
+                    <a href="www.linkedin.com/in/orewakakarot"><i class="fab fa-linkedin"></i></a>
+                    <!--<a href="#"><i class="fab fa-twitter"></i></a>-->
                 </div>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Pratham's Portfolio. All rights reserved.</p>
+            <p>© 2025 wwww.prathamrajgiri.com . All rights reserved.</p>
         </div>
     </footer>
 
