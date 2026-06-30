@@ -8,7 +8,7 @@ export const MobileAppRenderer: React.FC = () => {
   const { getAppManifest } = useApplication();
 
   return (
-    <div className="absolute inset-0 bg-black z-[5000]">
+    <div className={`absolute inset-0 z-[5000] ${windows.length > 0 ? 'bg-black pointer-events-auto' : 'pointer-events-none'}`}>
       <AnimatePresence>
         {windows.map((win: WindowStateObj) => {
           if (win.id !== activeWindowId && !win.isMinimized) return null;
