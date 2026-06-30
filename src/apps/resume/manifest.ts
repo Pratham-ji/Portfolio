@@ -5,6 +5,7 @@ export const ResumeManifest: AppManifest = {
   id: 'resume',
   name: 'Resume',
   icon: 'file-text',
+  iconUrl: '/icons/resume_icon.png',
   component: lazy(() => import('./ResumeApp')),
   defaultSize: { width: 800, height: 700 },
   minSize: { width: 500, height: 500 },

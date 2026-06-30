@@ -4,7 +4,8 @@ import { lazy } from 'react';
 export const ExplorerManifest: AppManifest = {
   id: 'explorer',
   name: 'File Explorer',
-  icon: 'folder', // Using lucide icon names broadly
+  icon: 'folder',
+  iconUrl: '/icons/folder_icon.png', // Using lucide icon names broadly
   component: lazy(() => import('./ExplorerApp')),
   defaultSize: { width: 800, height: 600 },
   minSize: { width: 400, height: 300 },

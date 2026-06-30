@@ -14,7 +14,7 @@ export const MobileHomeScreen: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <div className="absolute inset-0 bg-black flex flex-col pt-12 pb-8">
+    <div className="absolute inset-0 bg-black flex flex-col pt-12 pb-8 bg-cover bg-center" style={{ backgroundImage: 'url(/wallpapers/mobbcg.jpg)' }}>
       {/* App Grid */}
       <div className="flex-1 px-6 pt-8 grid grid-cols-4 gap-x-4 gap-y-8 content-start">
         {apps.map(appId => {

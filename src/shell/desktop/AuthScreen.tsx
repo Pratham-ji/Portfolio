@@ -67,8 +67,9 @@ export const AuthScreen: React.FC = () => {
           className="absolute inset-0 z-[80000] bg-black/60 backdrop-blur-xl flex flex-col items-center justify-center pointer-events-auto"
         >
           <div className="flex flex-col items-center gap-6">
-            <div className="w-32 h-32 rounded-full bg-os-blue flex items-center justify-center text-white shadow-2xl">
-              <UserIcon size={64} />
+            <div className="w-32 h-32 rounded-full bg-os-blue flex items-center justify-center text-white shadow-2xl overflow-hidden border-2 border-white/20">
+              <img src="/profile.jpg" alt="Pratham" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+              <UserIcon size={64} className="hidden absolute" />
             </div>
             
             <h2 className="text-3xl font-semibold text-white">Pratham</h2>

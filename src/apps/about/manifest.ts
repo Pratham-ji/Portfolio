@@ -5,6 +5,7 @@ export const AboutManifest: AppManifest = {
   id: 'about',
   name: 'About',
   icon: 'info',
+  iconUrl: '/icons/photo_icon.png',
   component: lazy(() => import('./AboutApp')),
   defaultSize: { width: 600, height: 500 },
   minSize: { width: 400, height: 400 },

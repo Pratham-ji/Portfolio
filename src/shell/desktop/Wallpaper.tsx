@@ -31,8 +31,12 @@ export const Wallpaper: React.FC = () => {
 
   return (
     <div 
-      className="absolute inset-0 w-full h-full -z-10 pointer-events-none transition-colors duration-700 ease-in-out"
-      style={{ background: getWallpaperStyle() }}
+      className="absolute inset-0 w-full h-full -z-10 pointer-events-none transition-colors duration-700 ease-in-out bg-cover bg-center"
+      style={{ 
+        background: settings.wallpaper === 'default' 
+          ? 'url(/wallpapers/background.jpg) center/cover no-repeat' 
+          : getWallpaperStyle() 
+      }}
       aria-hidden="true"
     />
   );

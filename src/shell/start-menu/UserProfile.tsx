@@ -16,8 +16,9 @@ export const UserProfile: React.FC = () => {
   return (
     <div className="mt-auto p-6 border-t border-white/10 flex items-center justify-between bg-black/20 rounded-b-xl">
       <div className="flex items-center gap-4 hover:bg-white/5 p-2 pr-4 rounded-lg cursor-pointer transition-colors">
-        <div className="w-10 h-10 rounded-full bg-os-blue flex items-center justify-center text-white shadow-lg">
-          <UserIcon size={20} />
+        <div className="w-10 h-10 rounded-full bg-os-blue flex items-center justify-center text-white shadow-lg overflow-hidden border border-white/20">
+          <img src="/profile.jpg" alt="Pratham" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+          <UserIcon size={20} className="hidden absolute" />
         </div>
         <div className="flex flex-col">
           <span className="text-sm font-semibold text-white">Pratham</span>

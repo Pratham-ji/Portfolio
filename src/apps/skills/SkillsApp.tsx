@@ -47,7 +47,11 @@ export const SkillsApp: React.FC = () => {
                 <div key={index} className="flex flex-col gap-2 group">
                   <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-2">
-                      {skill.proficiency >= 90 && <AwardIcon size={16} className="text-yellow-400" />}
+                      {skill.icon ? (
+                        <img src={skill.icon} alt={skill.name} className="w-5 h-5 object-contain" />
+                      ) : (
+                        skill.proficiency >= 90 && <AwardIcon size={16} className="text-yellow-400" />
+                      )}
                       <span className="font-medium text-white/90">{skill.name}</span>
                     </div>
                     <span className="text-white/50">{skill.proficiency}%</span>
