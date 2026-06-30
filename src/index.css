@@ -39,6 +39,11 @@
     --theme-error-bg: #450a0a;
   }
 
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+  }
+
   body {
     background-color: var(--theme-bg);
     color: var(--theme-text);
