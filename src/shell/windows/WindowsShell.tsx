@@ -1,0 +1,26 @@
+import React from 'react';
+import { Desktop } from '../desktop';
+import { WindowRenderer } from '../window';
+import { Taskbar } from '../taskbar';
+import { StartMenu } from '../start-menu';
+import { Spotlight } from '../spotlight';
+import { NotificationToasts } from '../notifications';
+import { DeveloperMode } from '../developer-mode';
+import { BootScreen } from '../desktop/BootScreen';
+
+const WindowsShell: React.FC = () => {
+  return (
+    <div className="w-full h-full relative">
+      <Desktop />
+      <WindowRenderer />
+      <Taskbar />
+      <StartMenu />
+      <Spotlight />
+      <NotificationToasts />
+      <DeveloperMode />
+      <BootScreen />
+    </div>
+  );
+};
+
+export default WindowsShell;

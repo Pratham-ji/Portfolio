@@ -85,6 +85,28 @@ export const SettingsApp: React.FC = () => {
                   <button aria-label="Purple Accent" className="w-8 h-8 rounded-full bg-[#bf5af2] hover:scale-110 transition-transform" />
                 </div>
               </div>
+              <div className="bg-[#2c2c2e] p-5 rounded-2xl border border-[#3a3a3c]">
+                <h3 className="font-bold mb-4">Platform Theme</h3>
+                <div className="flex gap-4">
+                  {(['auto', 'windows', 'macos', 'linux'] as const).map(theme => (
+                    <button 
+                      key={theme}
+                      onClick={() => updateSetting('platformTheme', theme)}
+                      aria-label={`${theme} theme`}
+                      className={`px-4 py-2 rounded-lg font-medium capitalize transition-all ${
+                        settings.platformTheme === theme 
+                          ? 'bg-[#0a84ff] text-white' 
+                          : 'bg-[#3a3a3c] text-[#ebebf5]/60 hover:text-white'
+                      }`}
+                    >
+                      {theme}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs text-[#ebebf5]/40 mt-3">
+                  Auto dynamically detects your device. Manually selecting a theme will lock the Desktop Shell (this does not apply to Mobile/Tablet).
+                </p>
+              </div>
             </div>
           )}
 

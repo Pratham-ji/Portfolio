@@ -3,6 +3,7 @@ export interface OS_Settings {
   accentColor: string;
   animationsEnabled: boolean;
   wallpaper: string;
+  platformTheme: 'auto' | 'windows' | 'macos' | 'linux';
 }
 
 export interface SettingsState {

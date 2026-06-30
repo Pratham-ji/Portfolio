@@ -1,15 +1,7 @@
 import React from 'react';
 import { Foundry } from './core/foundry/Foundry';
-
-import { Desktop } from './shell/desktop';
-import { WindowRenderer } from './shell/window';
-import { Taskbar } from './shell/taskbar';
-import { StartMenu } from './shell/start-menu';
-import { Spotlight } from './shell/spotlight';
-import { NotificationToasts } from './shell/notifications';
-import { DeveloperMode } from './shell/developer-mode';
 import { ShellProvider } from './shell/context';
-import { BootScreen } from './shell/desktop/BootScreen';
+import { AdaptiveShellLoader } from './shell/AdaptiveShellLoader';
 import { useSettings } from './core/settings-manager';
 import { MotionConfig, useReducedMotion } from 'framer-motion';
 
@@ -23,16 +15,7 @@ const OS_Interface = () => {
   return (
     <ShellProvider>
       <MotionConfig reducedMotion={shouldReduceMotion ? "always" : "user"}>
-        <div className="w-full h-screen overflow-hidden bg-[var(--theme-bg)] text-[var(--theme-text)] relative">
-          <Desktop />
-          <WindowRenderer />
-          <Taskbar />
-          <StartMenu />
-          <Spotlight />
-          <NotificationToasts />
-          <DeveloperMode />
-          <BootScreen />
-        </div>
+        <AdaptiveShellLoader />
       </MotionConfig>
     </ShellProvider>
   );

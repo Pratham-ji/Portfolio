@@ -3,6 +3,7 @@ export interface OS_Settings {
   accentColor: string;
   animationsEnabled: boolean;
   wallpaper: string;
+  platformTheme: 'auto' | 'windows' | 'macos' | 'linux';
 }
 
 export const defaultSettings: OS_Settings = {
@@ -10,4 +11,5 @@ export const defaultSettings: OS_Settings = {
   accentColor: 'os-blue',
   animationsEnabled: true,
   wallpaper: 'default',
+  platformTheme: 'auto',
 };
