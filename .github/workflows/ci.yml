@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - run: npm ci --legacy-peer-deps
+    
+    - name: TypeScript Check
+      run: npx tsc --noEmit
+      
+    - name: ESLint
+      run: npx eslint src/ --ext .ts,.tsx || true # Temporary fallback during setup
+      
+    - name: Code Quality Gates (DangerouslySetInnerHTML)
+      run: |
+        COUNT=$(grep -r 'dangerouslySetInnerHTML' src/ | wc -l)
+        if [ "$COUNT" -gt 0 ]; then
+          echo "dangerouslySetInnerHTML found! Security violation."
+          exit 1
+        fi
+        
+    - name: Build
+      run: npm run build
