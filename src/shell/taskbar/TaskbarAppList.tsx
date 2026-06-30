@@ -7,7 +7,7 @@ export const TaskbarAppList: React.FC = () => {
   const { getAppManifest } = useApplication();
 
   return (
-    <div className="flex items-center justify-center flex-1 h-full gap-1">
+    <div className="flex items-center h-full gap-1">
       {windows.map(win => {
         const isActive = win.id === activeWindowId;
         const manifest = getAppManifest(win.appId);
@@ -27,7 +27,7 @@ export const TaskbarAppList: React.FC = () => {
             }}
             className={`
               relative flex items-center justify-center w-10 h-10 rounded-md transition-all duration-200
-              ${isActive ? 'bg-[var(--theme-surface-active)]' : 'hover:bg-[var(--theme-surface-hover)]'}
+              ${isActive ? 'bg-white/20' : 'hover:bg-white/10'}
             `}
             title={manifest?.name || win.title}
           >

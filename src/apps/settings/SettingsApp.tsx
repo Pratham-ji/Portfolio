@@ -15,7 +15,7 @@ export const SettingsApp: React.FC = () => {
   const { settings, updateSetting } = useSettings();
 
   const handleWallpaperChange = (wallpaper: string) => {
-    updateSetting('wallpaper', wallpaper as any);
+    updateSetting('wallpaper', wallpaper);
   };
 
   return (

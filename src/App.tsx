@@ -4,6 +4,7 @@ import { ShellProvider } from './shell/context';
 import { AdaptiveShellLoader } from './shell/AdaptiveShellLoader';
 import { useSettings } from './core/settings-manager';
 import { MotionConfig, useReducedMotion } from 'framer-motion';
+import { Onboarding } from './shell/desktop/Onboarding';
 
 const OS_Interface = () => {
   const { settings } = useSettings();
@@ -16,6 +17,7 @@ const OS_Interface = () => {
     <ShellProvider>
       <MotionConfig reducedMotion={shouldReduceMotion ? "always" : "user"}>
         <AdaptiveShellLoader />
+        <Onboarding />
       </MotionConfig>
     </ShellProvider>
   );

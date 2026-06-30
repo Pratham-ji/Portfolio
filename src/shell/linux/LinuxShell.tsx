@@ -2,14 +2,25 @@ import React from 'react';
 import { BootScreen } from '../desktop/BootScreen';
 import { DeveloperMode } from '../developer-mode';
 import { NotificationToasts } from '../notifications';
+import { Desktop } from '../desktop';
+import { WindowRenderer } from '../window';
+import { AuthScreen } from '../desktop/AuthScreen';
+import { TopBar } from './TopBar';
+import { Activities } from './Activities';
 
-// Temporary Placeholder
 const LinuxShell: React.FC = () => {
   return (
-    <div className="w-full h-full relative bg-gray-900 flex items-center justify-center">
-      <h1 className="text-white text-2xl">Linux Shell (Under Construction)</h1>
+    <div className="w-full h-full relative overflow-hidden text-white bg-black">
+      <Desktop />
+      <TopBar />
+      <div className="absolute inset-0 top-8">
+        <WindowRenderer />
+      </div>
+      <Activities />
+      
       <NotificationToasts />
       <DeveloperMode />
+      <AuthScreen />
       <BootScreen />
     </div>
   );

@@ -4,6 +4,7 @@ import { Sidebar } from './components/Sidebar';
 import { Breadcrumbs } from './components/Breadcrumbs';
 import { FileGrid, FileList } from './components/FileViews';
 import { FilePreview } from './components/FilePreview';
+import { ContextMenu } from './components/ContextMenu';
 import { FolderOpenIcon } from 'lucide-react';
 
 const ExplorerApp: React.FC = () => {
@@ -16,10 +17,11 @@ const ExplorerApp: React.FC = () => {
   
   const [previewFile, setPreviewFile] = useState<FileSystemNode | null>(null);
 
+  // Context menu state
+  const [contextMenu, setContextMenu] = useState<{ x: number, y: number, node: FileSystemNode | null }>({ x: 0, y: 0, node: null });
+
   const navigate = (path: string) => {
     if (path === currentPath) return;
-    
-    // We only keep history up to current index, drop future
     const newHistory = history.slice(0, historyIndex + 1);
     newHistory.push(path);
     setHistory(newHistory);
@@ -45,7 +47,7 @@ const ExplorerApp: React.FC = () => {
     if (currentPath === '/') return;
     const parts = currentPath.split('/').filter(Boolean);
     parts.pop();
-    navigate('/' + parts.join('/'));
+    navigate('/' + (parts.length > 0 ? parts.join('/') : ''));
   };
 
   const handleOpenNode = (node: FileSystemNode) => {
@@ -57,14 +59,31 @@ const ExplorerApp: React.FC = () => {
     }
   };
 
-  // Get current directory children
+  const handleContextMenu = (e: React.MouseEvent, node: FileSystemNode) => {
+    e.preventDefault();
+    setContextMenu({ x: e.clientX, y: e.clientY, node });
+  };
+
+  const handleRename = (node: FileSystemNode) => {
+    // Placeholder for rename logic
+    console.log('Rename', node.name);
+  };
+
+  const handleDelete = (node: FileSystemNode) => {
+    // Placeholder for delete logic
+    console.log('Delete', node.name);
+  };
+
+  const handleProperties = (node: FileSystemNode) => {
+    // Placeholder for properties logic
+    console.log('Properties', node.name);
+  };
+
   const children = useMemo(() => {
     return Object.values(fsState.nodes)
       .filter(n => n.parentId === currentPath)
       .sort((a, b) => {
-        if (a.type !== b.type) {
-          return a.type === 'directory' ? -1 : 1;
-        }
+        if (a.type !== b.type) return a.type === 'directory' ? -1 : 1;
         return a.name.localeCompare(b.name);
       });
   }, [fsState.nodes, currentPath]);
@@ -86,7 +105,7 @@ const ExplorerApp: React.FC = () => {
       <div className="flex flex-1 overflow-hidden">
         <Sidebar currentPath={currentPath} onNavigate={navigate} />
         
-        <div className="flex-1 overflow-y-auto bg-black/40 relative">
+        <div className="flex-1 overflow-y-auto bg-black/40 relative" onPointerDown={() => setContextMenu({ x: 0, y: 0, node: null })}>
           {children.length === 0 ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-white/30 gap-4">
               <FolderOpenIcon size={64} className="opacity-50" />
@@ -94,14 +113,26 @@ const ExplorerApp: React.FC = () => {
             </div>
           ) : (
             viewMode === 'grid' 
-              ? <FileGrid nodes={children} viewMode={viewMode} onOpen={handleOpenNode} />
-              : <FileList nodes={children} viewMode={viewMode} onOpen={handleOpenNode} />
+              ? <FileGrid nodes={children} viewMode={viewMode} onOpen={handleOpenNode} onContextMenu={handleContextMenu} />
+              : <FileList nodes={children} viewMode={viewMode} onOpen={handleOpenNode} onContextMenu={handleContextMenu} />
           )}
         </div>
       </div>
 
       {previewFile && (
         <FilePreview file={previewFile} onClose={() => setPreviewFile(null)} />
+      )}
+
+      {contextMenu.node && (
+        <ContextMenu 
+          x={contextMenu.x} 
+          y={contextMenu.y} 
+          node={contextMenu.node} 
+          onClose={() => setContextMenu({ x: 0, y: 0, node: null })}
+          onRename={handleRename}
+          onDelete={handleDelete}
+          onProperties={handleProperties}
+        />
       )}
     </div>
   );

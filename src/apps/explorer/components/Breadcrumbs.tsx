@@ -56,19 +56,31 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         })}
       </div>
 
-      <div className="flex items-center gap-1 bg-black/20 rounded-md p-0.5 border border-white/5">
-        <button aria-label="Reload Directory"
-          onClick={() => onSetViewMode('grid')} 
-          className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/80'}`}
-        >
-          <GridIcon size={14} />
-        </button>
-        <button aria-label="Search"
-          onClick={() => onSetViewMode('list')} 
-          className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/80'}`}
-        >
-          <ListIcon size={14} />
-        </button>
+      <div className="flex items-center gap-2">
+        <div className="relative">
+          <input 
+            type="text" 
+            placeholder="Search..." 
+            className="w-32 lg:w-48 bg-black/20 border border-white/5 rounded-md py-1 px-3 pl-8 text-sm text-white focus:outline-none focus:border-os-blue placeholder-white/30"
+          />
+          <svg className="w-3.5 h-3.5 absolute left-2.5 top-2 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <div className="flex items-center gap-1 bg-black/20 rounded-md p-0.5 border border-white/5">
+          <button aria-label="Grid View"
+            onClick={() => onSetViewMode('grid')} 
+            className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/80'}`}
+          >
+            <GridIcon size={14} />
+          </button>
+          <button aria-label="List View"
+            onClick={() => onSetViewMode('list')} 
+            className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/80'}`}
+          >
+            <ListIcon size={14} />
+          </button>
+        </div>
       </div>
     </div>
   );

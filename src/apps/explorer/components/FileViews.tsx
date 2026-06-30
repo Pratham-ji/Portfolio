@@ -6,6 +6,7 @@ interface FileListProps {
   nodes: FileSystemNode[];
   viewMode: 'grid' | 'list';
   onOpen: (node: FileSystemNode) => void;
+  onContextMenu: (e: React.MouseEvent, node: FileSystemNode) => void;
 }
 
 const getFileIcon = (node: FileSystemNode) => {
@@ -28,13 +29,14 @@ const getSmallFileIcon = (node: FileSystemNode) => {
   return <FileIcon size={16} className="text-white/60" />;
 };
 
-export const FileGrid: React.FC<FileListProps> = ({ nodes, onOpen }) => {
+export const FileGrid: React.FC<FileListProps> = ({ nodes, onOpen, onContextMenu }) => {
   return (
     <div className="p-4 grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-4 content-start">
       {nodes.map(node => (
         <button
           key={node.id}
           onDoubleClick={() => onOpen(node)}
+          onContextMenu={(e) => onContextMenu(e, node)}
           className="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-white/10 group focus:outline-none focus:ring-2 focus:ring-blue-500/50"
         >
           <div className="w-12 h-12 flex items-center justify-center rounded-lg group-hover:scale-105 transition-transform">
@@ -47,7 +49,7 @@ export const FileGrid: React.FC<FileListProps> = ({ nodes, onOpen }) => {
   );
 };
 
-export const FileList: React.FC<FileListProps> = ({ nodes, onOpen }) => {
+export const FileList: React.FC<FileListProps> = ({ nodes, onOpen, onContextMenu }) => {
   return (
     <div className="p-2 flex flex-col gap-0.5">
       <div className="flex items-center px-3 py-1.5 text-xs font-semibold text-white/50 border-b border-white/5 mb-1">
@@ -59,6 +61,7 @@ export const FileList: React.FC<FileListProps> = ({ nodes, onOpen }) => {
         <button
           key={node.id}
           onDoubleClick={() => onOpen(node)}
+          onContextMenu={(e) => onContextMenu(e, node)}
           className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/10 group focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-left"
         >
           {getSmallFileIcon(node)}

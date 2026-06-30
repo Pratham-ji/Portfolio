@@ -9,27 +9,26 @@ export interface PlatformInfo {
   isTouch: boolean;
 }
 
+const checkPlatform = (platformStr: string, checks: string[]) => 
+  checks.some(c => platformStr.includes(c));
+
+const getOsFromStr = (str: string): OSType | null => {
+  if (checkPlatform(str, ['win'])) return 'windows';
+  if (checkPlatform(str, ['mac', 'os x'])) return 'macos';
+  if (checkPlatform(str, ['linux', 'x11'])) return 'linux';
+  return null;
+};
+
 const getOSType = (): OSType => {
   if (typeof window === 'undefined') return 'unknown';
   
-  // Use userAgentData if available (modern browsers)
-  const nav = navigator as any;
-  if (nav.userAgentData && nav.userAgentData.platform) {
-    const platform = nav.userAgentData.platform.toLowerCase();
-    if (platform.includes('win')) return 'windows';
-    if (platform.includes('mac')) return 'macos';
-    if (platform.includes('linux')) return 'linux';
-  }
+  const nav = navigator as unknown as { userAgentData?: { platform?: string } };
+  const uaPlatform = nav.userAgentData?.platform?.toLowerCase() || '';
+  const uaOs = getOsFromStr(uaPlatform);
+  if (uaOs) return uaOs;
 
-  // Fallback to legacy platform/userAgent
-  const ua = navigator.userAgent.toLowerCase();
-  const platform = navigator.platform.toLowerCase();
-  
-  if (platform.includes('win') || ua.includes('windows')) return 'windows';
-  if (platform.includes('mac') || ua.includes('macintosh') || ua.includes('mac os x')) return 'macos';
-  if (platform.includes('linux') || ua.includes('x11')) return 'linux';
-  
-  return 'unknown';
+  const combined = `${navigator.userAgent} ${navigator.platform}`.toLowerCase();
+  return getOsFromStr(combined) || 'unknown';
 };
 
 const getDeviceType = (): { deviceType: DeviceType; isTouch: boolean } => {

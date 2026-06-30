@@ -6,8 +6,8 @@
 
 # Test info
 
-- Name: desktop.spec.ts >> PrathamOS Desktop >> should load desktop and start menu
-- Location: tests/desktop.spec.ts:4:3
+- Name: desktop.spec.ts >> PrathamOS Desktop >> should open an application from start menu
+- Location: tests/desktop.spec.ts:25:3
 
 # Error details
 
@@ -72,8 +72,7 @@ Call log:
   15 | 
   16 |     // Open Start Menu
   17 |     const startBtn = page.getByRole('button', { name: 'Start Menu' });
-> 18 |     await startBtn.click({ force: true });
-     |                    ^ Error: locator.click: Element is outside of the viewport
+  18 |     await startBtn.click({ force: true });
   19 | 
   20 |     // Check if start menu opens
   21 |     const startMenu = page.getByText('Pinned', { exact: true });
@@ -89,7 +88,8 @@ Call log:
   31 |     await page.goto('/');
   32 | 
   33 |     // Open Start Menu
-  34 |     await page.getByRole('button', { name: 'Start Menu' }).click({ force: true });
+> 34 |     await page.getByRole('button', { name: 'Start Menu' }).click({ force: true });
+     |                                                            ^ Error: locator.click: Element is outside of the viewport
   35 | 
   36 |     // Click on Terminal app (we have an aria-label or text)
   37 |     const terminalApp = page.getByText('Terminal').first();

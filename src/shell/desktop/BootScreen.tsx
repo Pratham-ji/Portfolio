@@ -15,7 +15,7 @@ export const BootScreen: React.FC = () => {
       setProgress(p => {
         if (p >= 100) {
           clearInterval(interval);
-          setTimeout(() => setPowerState('on'), 300); // Small delay before fading out
+          setTimeout(() => setPowerState('locked'), 300); // Small delay before fading out
           return 100;
         }
         // Random progress jump between 5 and 20

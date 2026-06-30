@@ -7,6 +7,7 @@ import { Spotlight } from '../spotlight';
 import { NotificationToasts } from '../notifications';
 import { DeveloperMode } from '../developer-mode';
 import { BootScreen } from '../desktop/BootScreen';
+import { AuthScreen } from '../desktop/AuthScreen';
 
 const WindowsShell: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const WindowsShell: React.FC = () => {
       <Spotlight />
       <NotificationToasts />
       <DeveloperMode />
+      <AuthScreen />
       <BootScreen />
     </div>
   );

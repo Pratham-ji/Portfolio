@@ -2,14 +2,25 @@ import React from 'react';
 import { BootScreen } from '../desktop/BootScreen';
 import { DeveloperMode } from '../developer-mode';
 import { NotificationToasts } from '../notifications';
+import { Spotlight } from '../spotlight';
+import { Desktop } from '../desktop';
+import { WindowRenderer } from '../window';
+import { MenuBar } from './MenuBar';
+import { Dock } from './Dock';
+import { AuthScreen } from '../desktop/AuthScreen';
 
-// Temporary Placeholder
 const MacOSShell: React.FC = () => {
   return (
-    <div className="w-full h-full relative bg-gray-900 flex items-center justify-center">
-      <h1 className="text-white text-2xl">macOS Shell (Under Construction)</h1>
+    <div className="w-full h-full relative overflow-hidden text-[var(--theme-text)]">
+      <Desktop />
+      <MenuBar />
+      <WindowRenderer />
+      <Dock />
+      
+      <Spotlight />
       <NotificationToasts />
       <DeveloperMode />
+      <AuthScreen />
       <BootScreen />
     </div>
   );

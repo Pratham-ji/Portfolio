@@ -5,7 +5,7 @@ interface ShellState {
   isSpotlightOpen: boolean;
   isNotificationCenterOpen: boolean;
   isDeveloperModeOpen: boolean;
-  powerState: 'booting' | 'on' | 'shutting_down' | 'off';
+  powerState: 'booting' | 'on' | 'shutting_down' | 'off' | 'locked' | 'login';
 }
 
 interface ShellContextValue {
@@ -15,7 +15,7 @@ interface ShellContextValue {
   toggleNotificationCenter: () => void;
   toggleDeveloperMode: () => void;
   closeAllOverlays: () => void;
-  setPowerState: (state: 'booting' | 'on' | 'shutting_down' | 'off') => void;
+  setPowerState: (state: 'booting' | 'on' | 'shutting_down' | 'off' | 'locked' | 'login') => void;
 }
 
 const ShellContext = createContext<ShellContextValue | undefined>(undefined);
@@ -29,7 +29,7 @@ export const ShellProvider = ({ children }: { children: ReactNode }) => {
     powerState: 'booting',
   });
 
-  const setPowerState = useCallback((powerState: 'booting' | 'on' | 'shutting_down' | 'off') => {
+  const setPowerState = useCallback((powerState: 'booting' | 'on' | 'shutting_down' | 'off' | 'locked' | 'login') => {
     setState(prev => ({ ...prev, powerState }));
   }, []);
 
