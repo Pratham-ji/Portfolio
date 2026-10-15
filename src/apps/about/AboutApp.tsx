@@ -19,7 +19,7 @@ export const AboutApp: React.FC = () => {
       
       {/* Hero Section */}
       <div className="relative overflow-hidden border-b border-[var(--theme-border)] bg-[var(--theme-surface)] p-8 flex flex-col items-center justify-center text-center">
-        <div className="absolute inset-0 bg-[url('/assets/noise.png')] opacity-[0.03] mix-blend-overlay"></div>
+        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/5 to-purple-500/5"></div>
         
         <motion.div 

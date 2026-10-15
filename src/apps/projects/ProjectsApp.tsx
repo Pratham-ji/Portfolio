@@ -68,7 +68,7 @@ export const ProjectsApp: React.FC = () => {
                   </div>
                 ) : (
                   <div className="w-full h-64 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-dashed border-[var(--theme-border)] mb-8 flex flex-col items-center justify-center shadow-inner gap-3 relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-[url('/assets/noise.png')] opacity-10 mix-blend-overlay"></div>
+                    <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
                     <LayoutTemplateIcon size={48} className="text-[var(--theme-text-muted)] opacity-50 group-hover:scale-110 transition-transform" strokeWidth={1} />
                     <span className="text-[var(--theme-text-muted)] font-bold text-sm tracking-widest uppercase opacity-70">Project Hero Image Placeholder</span>
                   </div>
