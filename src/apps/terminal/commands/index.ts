@@ -1,0 +1,33 @@
+import { TerminalCommands } from '../runtime/TerminalCommands';
+import { helpCommand } from './help';
+import { lsCommand } from './ls';
+import { cdCommand } from './cd';
+import { pwdCommand } from './pwd';
+import { catCommand } from './cat';
+import { clearCommand } from './clear';
+import { historyCommand } from './history';
+import { openCommand } from './open';
+import { resumeCommand, projectsCommand, skillsCommand, contactCommand, aboutCommand, engineeringCommand } from './shortcuts';
+import { neofetchCommand } from './neofetch';
+import { chaiCommand } from './chai';
+import { echoCommand } from './echo';
+
+export const registerAllCommands = () => {
+  TerminalCommands.register(echoCommand);
+  TerminalCommands.register(helpCommand);
+  TerminalCommands.register(lsCommand);
+  TerminalCommands.register(cdCommand);
+  TerminalCommands.register(pwdCommand);
+  TerminalCommands.register(catCommand);
+  TerminalCommands.register(clearCommand);
+  TerminalCommands.register(historyCommand);
+  TerminalCommands.register(openCommand);
+  TerminalCommands.register(resumeCommand);
+  TerminalCommands.register(projectsCommand);
+  TerminalCommands.register(skillsCommand);
+  TerminalCommands.register(engineeringCommand);
+  TerminalCommands.register(contactCommand);
+  TerminalCommands.register(aboutCommand);
+  TerminalCommands.register(neofetchCommand);
+  TerminalCommands.register(chaiCommand);
+};

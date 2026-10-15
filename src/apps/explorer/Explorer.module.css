@@ -1,0 +1,192 @@
+.explorerLayout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: var(--pos-surface-0, rgba(255, 255, 255, 0.8));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--pos-text-primary, #000);
+  font-family: system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
+:global([data-theme="dark"]) .explorerLayout {
+  background-color: var(--pos-surface-0-dark, rgba(30, 30, 30, 0.8));
+  color: var(--pos-text-primary-dark, #fff);
+}
+
+.sidebar {
+  width: 220px;
+  border-right: 1px solid var(--pos-border-subtle, rgba(0,0,0,0.1));
+  display: flex;
+  flex-direction: column;
+  padding: 16px 8px;
+  background-color: var(--pos-surface-1, rgba(255, 255, 255, 0.4));
+}
+
+:global([data-theme="dark"]) .sidebar {
+  border-color: var(--pos-border-subtle-dark, rgba(255, 255, 255, 0.1));
+  background-color: var(--pos-surface-1-dark, rgba(50, 50, 50, 0.4));
+}
+
+.sidebarSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebarHeader {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--pos-text-secondary, #666);
+  padding: 4px 8px;
+  margin-bottom: 4px;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: var(--pos-radius-sm, 6px);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.sidebarItem:hover {
+  background-color: var(--pos-surface-hover, rgba(0,0,0,0.05));
+}
+
+.sidebarItem.active {
+  background-color: var(--pos-surface-active, rgba(0, 122, 255, 0.1));
+  color: var(--pos-color-primary, #007aff);
+}
+
+:global([data-theme="dark"]) .sidebarItem:hover {
+  background-color: var(--pos-surface-hover-dark, rgba(255,255,255,0.1));
+}
+
+:global([data-theme="dark"]) .sidebarItem.active {
+  background-color: var(--pos-surface-active-dark, rgba(0, 122, 255, 0.2));
+  color: var(--pos-color-primary, #47a1ff);
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.splitter {
+  width: 8px;
+  cursor: col-resize;
+  background-color: transparent;
+  z-index: 10;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+.splitter:hover {
+  background-color: rgba(0, 122, 255, 0.1);
+}
+
+.mainArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--pos-border-subtle, rgba(0,0,0,0.1));
+  font-size: 13px;
+  background-color: var(--pos-surface-0, transparent);
+}
+
+:global([data-theme="dark"]) .breadcrumbs {
+  border-color: var(--pos-border-subtle-dark, rgba(255, 255, 255, 0.1));
+}
+
+.crumb {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--pos-radius-sm, 4px);
+}
+
+.crumb:hover {
+  background-color: var(--pos-surface-hover, rgba(0,0,0,0.05));
+}
+
+.crumbSeparator {
+  color: var(--pos-text-muted, #999);
+  margin: 0 4px;
+}
+
+.gridContainer {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  background-color: transparent;
+}
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  cursor: default;
+  border-bottom: 1px solid var(--pos-border-subtle, rgba(0,0,0,0.03));
+  font-size: 13px;
+}
+
+.fileRow:hover {
+  background-color: var(--pos-surface-hover, rgba(0,0,0,0.02));
+}
+
+.fileRow.selected {
+  background-color: var(--pos-color-primary, #007aff);
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .fileRow {
+  border-color: var(--pos-border-subtle-dark, rgba(255, 255, 255, 0.03));
+}
+
+.cellIcon {
+  width: 32px;
+  text-align: center;
+}
+
+.cellName {
+  flex: 2;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cellDate {
+  flex: 1;
+  color: var(--pos-text-secondary, #666);
+}
+
+.cellSize {
+  flex: 1;
+  color: var(--pos-text-secondary, #666);
+  text-align: right;
+}
+
+.fileRow.selected .cellDate,
+.fileRow.selected .cellSize {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--pos-text-muted, #999);
+  font-size: 14px;
+}

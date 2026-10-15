@@ -1,0 +1,75 @@
+.terminalLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--pos-surface-04, #0C0C0F); /* OLED Canvas */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--pos-text-primary-dark, #fff);
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+}
+
+.scrollArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.rendererContainer {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  /* hide scrollbar for sleekness if desired, but good to keep it */
+}
+
+.terminalLine {
+  display: flex;
+  align-items: center;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.prompt {
+  color: var(--pos-color-success, #34c759);
+  margin-right: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  caret-color: transparent; /* Hide native caret, we will use custom */
+}
+
+/* Custom Pratham Red Blinking Cursor */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: #D71921;
+  margin-left: 1px;
+  animation: blink 1s steps(1) infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

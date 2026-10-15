@@ -1,0 +1,39 @@
+/* ==========================================================================
+   PRATHAMOS v3.2 — SPACING & RADII TOKEN REGISTRY
+   ========================================================================== */
+
+:root {
+  /* 4px Strict Grid Spatial Scale */
+  --pos-space-4:  4px;
+  --pos-space-8:  8px;
+  --pos-space-12: 12px;
+  --pos-space-16: 16px;
+  --pos-space-20: 20px;
+  --pos-space-24: 24px;
+  --pos-space-28: 28px;
+  --pos-space-32: 32px;
+  --pos-space-36: 36px;
+  --pos-space-40: 40px;
+  --pos-space-44: 44px;
+  --pos-space-48: 48px;
+  --pos-space-52: 52px;
+  --pos-space-56: 56px;
+  --pos-space-60: 60px;
+  --pos-space-64: 64px;
+  --pos-space-68: 68px;
+  --pos-space-72: 72px;
+  --pos-space-76: 76px;
+  --pos-space-80: 80px;
+  --pos-space-84: 84px;
+  --pos-space-88: 88px;
+  --pos-space-92: 92px;
+  --pos-space-96: 96px;
+
+  /* Corner Radius Scale */
+  --pos-radius-sm:   6px;
+  --pos-radius-md:   10px;
+  --pos-radius-lg:   16px;
+  --pos-radius-win:  24px;
+  --pos-radius-dock: 28px;
+  --pos-radius-pill: 9999px;
+}

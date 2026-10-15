@@ -1,0 +1,48 @@
+.splitterContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  /* 8px hit target */
+}
+
+.horizontal {
+  height: 8px;
+  width: 100%;
+  cursor: row-resize;
+  transform: translateY(-50%); /* overlap edges if container is flex */
+}
+
+.vertical {
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.divider {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 100ms ease;
+}
+
+/* 1px visible line */
+.horizontal .divider {
+  width: 100%;
+  height: 1px;
+}
+
+.vertical .divider {
+  height: 100%;
+  width: 1px;
+}
+
+/* Hover/Active states */
+.splitterContainer:hover .divider,
+.splitterContainer:active .divider,
+.splitterContainer:focus-visible .divider {
+  background-color: var(--pos-accent-interactive);
+}
+
+.splitterContainer:focus-visible {
+  outline: none; /* Focus handled visually by divider color */
+}

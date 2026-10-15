@@ -14,8 +14,8 @@ const navItems = [
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => {
   return (
-    <div className="w-48 bg-black/20 border-r border-white/5 flex flex-col p-2 gap-1 overflow-y-auto">
-      <div className="text-xs font-semibold text-white/50 px-2 pb-1 pt-2 uppercase tracking-wider">
+    <div className="ds-sidebar bg-[var(--theme-surface)]">
+      <div className="ds-section-header pt-2">
         Quick Access
       </div>
       {navItems.map((item) => {
@@ -25,12 +25,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentPath, onNavigate }) => 
           <button
             key={item.path}
             onClick={() => onNavigate(item.path)}
-            className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors text-left
-              ${isActive ? 'bg-white/10 text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'}
-            `}
+            className={`ds-sidebar-item ${isActive ? 'active shadow-md' : 'text-[var(--theme-text)]'}`}
           >
-            <Icon size={16} className={isActive ? 'text-blue-400' : 'text-white/50'} />
-            <span className="truncate">{item.label}</span>
+            <Icon size={16} className={`${isActive ? 'text-white' : 'text-[var(--theme-accent)] group-hover:scale-110 transition-transform'}`} strokeWidth={isActive ? 2.5 : 2} />
+            <span className={`truncate ${isActive ? 'font-medium' : 'font-normal'}`}>{item.label}</span>
           </button>
         );
       })}

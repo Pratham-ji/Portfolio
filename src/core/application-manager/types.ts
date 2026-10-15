@@ -4,8 +4,9 @@ import { ComponentType } from 'react';
 export interface AppManifest {
   id: string;
   name: string;
-  icon: string; // Deprecated or fallback lucide name
+  icon?: string; // Deprecated: use fallbackIcon instead
   iconUrl?: string; // Path to custom PNG icon
+  fallbackIcon?: string; // Lucide fallback name
   componentUrl?: string; // Path for lazy loading, if needed
   component?: ComponentType<Record<string, unknown>>; // React component for the app
   defaultSize?: { width: number; height: number };

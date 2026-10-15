@@ -1,76 +1,109 @@
 import React, { useState } from 'react';
-import { skillsData } from './data/skills';
+import { skillsData } from '../../data/skills';
 import { ZapIcon, ChevronRightIcon, AwardIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const SkillsApp: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState(skillsData[0]?.id || '');
 
   const selectedCategory = skillsData.find(c => c.id === activeCategory);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 24 } }
+  };
+
   return (
-    <div className="w-full h-full bg-[#1e1e1e] text-white flex flex-col md:flex-row overflow-hidden">
+    <div className="ds-app-container">
       
       {/* Sidebar */}
-      <div className="w-full md:w-64 bg-black/20 border-b md:border-b-0 md:border-r border-white/10 flex flex-col p-4 gap-2">
-        <div className="flex items-center gap-2 px-2 pb-4 border-b border-white/5 mb-2">
-          <ZapIcon size={20} className="text-yellow-400" />
-          <h1 className="font-bold text-lg">Tech Radar</h1>
+      <div className="ds-sidebar bg-[var(--theme-surface)]/30 backdrop-blur-md">
+        <div className="flex items-center gap-3 px-3 pb-5 border-b border-[var(--theme-border)] mb-3">
+          <div className="p-2 bg-yellow-500/10 rounded-xl text-yellow-500 shadow-inner">
+             <ZapIcon size={24} strokeWidth={2.5} />
+          </div>
+          <div>
+             <h1 className="font-extrabold text-xl tracking-tight text-[var(--theme-text)]">Tech Radar</h1>
+             <p className="text-[11px] font-bold text-[var(--theme-text-muted)] uppercase tracking-widest mt-1">Skill Matrix</p>
+          </div>
         </div>
         
         {skillsData.map(category => (
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             key={category.id}
             onClick={() => setActiveCategory(category.id)}
-            className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+            className={`ds-sidebar-item justify-between ${
               activeCategory === category.id 
-                ? 'bg-blue-500/20 text-blue-400' 
-                : 'text-white/60 hover:bg-white/5 hover:text-white'
+                ? 'active shadow-blue-500/20' 
+                : 'hover:border-[var(--theme-accent)]/30'
             }`}
           >
             <span>{category.title}</span>
-            {activeCategory === category.id && <ChevronRightIcon size={16} />}
-          </button>
+            {activeCategory === category.id && <ChevronRightIcon size={18} strokeWidth={3} />}
+          </motion.button>
         ))}
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 p-8 overflow-y-auto bg-gradient-to-br from-[#1e1e1e] to-[#121212]">
-        {selectedCategory && (
-          <div className="max-w-3xl mx-auto flex flex-col gap-8">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-3xl font-bold">{selectedCategory.title}</h2>
-              <p className="text-white/50">{selectedCategory.description}</p>
-            </div>
+      <div className="ds-app-content relative">
+        <AnimatePresence mode="wait">
+          {selectedCategory && (
+            <motion.div 
+              key={selectedCategory.id}
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              exit={{ opacity: 0, x: 20, transition: { duration: 0.2 } }}
+              className="ds-app-content-inner"
+            >
+              <motion.div variants={itemVariants} className="flex flex-col gap-3">
+                <h2 className="text-3xl font-bold tracking-tight">{selectedCategory.title}</h2>
+                <p className="text-[var(--theme-text-muted)] font-medium text-[13px] max-w-2xl leading-relaxed">{selectedCategory.description}</p>
+              </motion.div>
 
-            <div className="flex flex-col gap-6 bg-white/5 border border-white/5 p-6 rounded-2xl">
-              {selectedCategory.skills.map((skill, index) => (
-                <div key={index} className="flex flex-col gap-2 group">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      {skill.icon ? (
-                        <img src={skill.icon} alt={skill.name} className="w-5 h-5 object-contain" />
-                      ) : (
-                        skill.proficiency >= 90 && <AwardIcon size={16} className="text-yellow-400" />
-                      )}
-                      <span className="font-medium text-white/90">{skill.name}</span>
+              <motion.div variants={itemVariants} className="ds-card flex flex-col gap-8">
+                {selectedCategory.skills.map((skill, index) => (
+                  <div key={index} className="flex flex-col gap-3 group">
+                    <div className="flex items-center justify-between text-[15px] font-bold">
+                      <div className="flex items-center gap-3">
+                        {skill.icon ? (
+                          <div className="w-8 h-8 rounded-lg bg-transparent flex items-center justify-center p-1.5 shadow-sm border border-[var(--theme-border)] group-hover:scale-110 transition-transform">
+                             <img src={skill.icon} alt={skill.name} className="w-full h-full object-contain" />
+                          </div>
+                        ) : (
+                          <div className="w-8 h-8 rounded-lg bg-transparent flex items-center justify-center p-1.5 shadow-sm border border-[var(--theme-border)] group-hover:scale-110 transition-transform">
+                             <AwardIcon size={18} className="text-yellow-500" />
+                          </div>
+                        )}
+                        <span className="text-[var(--theme-text)]">{skill.name}</span>
+                      </div>
+                      <span className="ds-tag">{skill.proficiency}%</span>
                     </div>
-                    <span className="text-white/50">{skill.proficiency}%</span>
+                    <div className="w-full h-3 bg-transparent rounded-full overflow-hidden relative border border-[var(--theme-border)] shadow-inner">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${skill.proficiency}%` }}
+                        transition={{ duration: 1, delay: 0.2 + (index * 0.1), type: 'spring', damping: 20 }}
+                        className="absolute top-0 left-0 h-full bg-[var(--theme-accent)] rounded-full shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)]"
+                      />
+                    </div>
                   </div>
-                  <div className="w-full h-2 bg-black/50 rounded-full overflow-hidden relative">
-                    <div 
-                      className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-full transition-all duration-1000 ease-out group-hover:shadow-[0_0_10px_rgba(96,165,250,0.5)]"
-                      style={{ width: `${skill.proficiency}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="text-center text-white/30 text-xs mt-4">
-              Proficiency scale is an estimation based on project usage, not standardized testing.
-            </div>
-          </div>
-        )}
+                ))}
+              </motion.div>
+              
+              <motion.div variants={itemVariants} className="text-center text-[var(--theme-text-muted)] font-medium text-[13px] mt-2 py-3 rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)]/50">
+                Proficiency scale is an estimation based on project usage, not standardized testing.
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
     </div>

@@ -37,5 +37,14 @@ export const defaultFileSystem: Record<string, FileSystemNode> = {
     icon: 'FileCode',
     createdAt: Date.now(),
     updatedAt: Date.now()
-  }
+  },
+  'terminal_app': { id: 'terminal_app', name: 'Terminal', type: 'file', parentId: 'desktop', appId: 'terminal', icon: 'Terminal', createdAt: Date.now(), updatedAt: Date.now() },
+  'projects_app': { id: 'projects_app', name: 'Projects', type: 'file', parentId: 'desktop', appId: 'projects', icon: 'Folder', createdAt: Date.now(), updatedAt: Date.now() },
+  'github_app': { id: 'github_app', name: 'GitHub', type: 'file', parentId: 'desktop', appId: 'github', icon: 'Github', createdAt: Date.now(), updatedAt: Date.now() },
+  'leetcode_app': { id: 'leetcode_app', name: 'LeetCode', type: 'file', parentId: 'desktop', appId: 'leetcode', icon: 'Code', createdAt: Date.now(), updatedAt: Date.now() },
+  'skills_app': { id: 'skills_app', name: 'Skills', type: 'file', parentId: 'desktop', appId: 'skills', icon: 'Cpu', createdAt: Date.now(), updatedAt: Date.now() },
+  'experience_app': { id: 'experience_app', name: 'Experience', type: 'file', parentId: 'desktop', appId: 'experience', icon: 'Briefcase', createdAt: Date.now(), updatedAt: Date.now() },
+  'resume_app': { id: 'resume_app', name: 'Resume', type: 'file', parentId: 'desktop', appId: 'resume', icon: 'FileText', createdAt: Date.now(), updatedAt: Date.now() },
+  'contact_app': { id: 'contact_app', name: 'Contact', type: 'file', parentId: 'desktop', appId: 'contact', icon: 'Mail', createdAt: Date.now(), updatedAt: Date.now() },
+  'about_app': { id: 'about_app', name: 'About', type: 'file', parentId: 'desktop', appId: 'about', icon: 'User', createdAt: Date.now(), updatedAt: Date.now() }
 };

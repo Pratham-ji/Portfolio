@@ -1,101 +1,183 @@
 import React, { useState } from 'react';
-import { projectsData } from './data/projects';
+import { projectsData } from '../../data/projects';
 import { BookIcon, CodeIcon, GitBranchIcon, ExternalLinkIcon, InfoIcon, LayoutTemplateIcon, LayersIcon, ZapIcon, TargetIcon, RocketIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const ProjectsApp: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string>(projectsData[0]?.id || '');
 
   const selectedProject = projectsData.find(p => p.id === selectedProjectId);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 300, damping: 24 } }
+  };
+
   return (
-    <div className="w-full h-full flex bg-[#0f0f11] text-[#e2e8f0] overflow-hidden">
+    <div className="ds-app-container">
       {/* Sidebar List */}
-      <div className="w-64 bg-black/40 border-r border-white/10 flex flex-col overflow-y-auto">
-        <div className="p-4 border-b border-white/5 bg-white/5">
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-white/50">Engineering Cases</h2>
+      <div className="ds-sidebar bg-[var(--theme-surface)]/30 backdrop-blur-md p-0 overflow-y-auto">
+        <div className="p-5 border-b border-[var(--theme-border)]/50 bg-[var(--theme-surface)]/20 sticky top-0 z-10">
+          <h2 className="ds-section-header mb-0 text-[var(--theme-text-muted)]">Engineering Cases</h2>
         </div>
-        <div className="flex-1 p-2 flex flex-col gap-1">
-          {projectsData.map(project => (
-            <button
-              key={project.id}
-              onClick={() => setSelectedProjectId(project.id)}
-              className={`text-left p-3 rounded-lg transition-all border ${
-                selectedProjectId === project.id
-                  ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
-                  : 'border-transparent text-white/70 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              <div className="font-medium text-sm mb-1">{project.name}</div>
-              <div className="text-xs opacity-60 line-clamp-2">{project.tagline}</div>
-            </button>
-          ))}
+        <div className="flex-1 p-3 flex flex-col gap-2">
+          {projectsData.map(project => {
+            const isSelected = selectedProjectId === project.id;
+            return (
+              <motion.button
+                whileHover={{ scale: isSelected ? 1 : 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                key={project.id}
+                onClick={() => setSelectedProjectId(project.id)}
+                className={`ds-sidebar-item flex-col items-start ${isSelected ? 'active shadow-lg shadow-blue-500/20' : ''}`}
+              >
+                <div className={`font-semibold text-sm mb-0.5 ${isSelected ? 'text-white' : 'text-[var(--theme-text)]'}`}>{project.name}</div>
+                <div className={`text-xs line-clamp-2 leading-relaxed ${isSelected ? 'text-white/80' : 'text-[var(--theme-text-muted)]'}`}>{project.tagline}</div>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
 
       {/* Main Details Area */}
-      <div className="flex-1 overflow-y-auto relative">
-        {selectedProject ? (
-          <div className="max-w-4xl mx-auto p-8 flex flex-col gap-8 pb-20">
-            {/* Header */}
-            <div>
-              <h1 className="text-4xl font-bold mb-3 tracking-tight text-white">{selectedProject.name}</h1>
-              <p className="text-lg text-white/60 mb-6">{selectedProject.tagline}</p>
+      <div className="ds-app-content relative">
+        <AnimatePresence mode="wait">
+          {selectedProject ? (
+            <motion.div 
+              key={selectedProject.id}
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              exit={{ opacity: 0, transition: { duration: 0.1 } }}
+              className="ds-app-content-inner"
+            >
+              {/* Header */}
+              <motion.div variants={itemVariants} className="pt-4">
+                {/* Hero Image */}
+                {selectedProject.heroImage && !selectedProject.heroImage.includes('TODO') ? (
+                  <div className="w-full h-64 rounded-2xl border border-[var(--theme-border)] mb-8 overflow-hidden shadow-lg">
+                    <img src={selectedProject.heroImage} alt={selectedProject.name} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-full h-64 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-dashed border-[var(--theme-border)] mb-8 flex flex-col items-center justify-center shadow-inner gap-3 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-[url('/assets/noise.png')] opacity-10 mix-blend-overlay"></div>
+                    <LayoutTemplateIcon size={48} className="text-[var(--theme-text-muted)] opacity-50 group-hover:scale-110 transition-transform" strokeWidth={1} />
+                    <span className="text-[var(--theme-text-muted)] font-bold text-sm tracking-widest uppercase opacity-70">Project Hero Image Placeholder</span>
+                  </div>
+                )}
+                
+                
+                <h1 className="text-3xl font-bold mb-4 tracking-tight text-[var(--theme-text)]">{selectedProject.name}</h1>
+                <p className="text-xl text-[var(--theme-text-muted)] mb-8 font-medium leading-relaxed max-w-3xl">{selectedProject.tagline}</p>
+                
+                <div className="flex flex-wrap gap-4 mb-8">
+                  {selectedProject.repositoryUrl && !selectedProject.repositoryUrl.includes('TODO') && selectedProject.repositoryUrl !== 'Coming Soon' ? (
+                    <a href={selectedProject.repositoryUrl} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary">
+                      <GitBranchIcon size={16} /> Repository
+                    </a>
+                  ) : (
+                    <span className="ds-btn ds-btn-ghost bg-[var(--theme-surface)]/50 border border-[var(--theme-border)]/50 cursor-not-allowed">
+                      <GitBranchIcon size={16} /> Repository (Pending)
+                    </span>
+                  )}
+
+                  {selectedProject.liveDemoUrl && !selectedProject.liveDemoUrl.includes('TODO') && selectedProject.liveDemoUrl !== 'Coming Soon' ? (
+                    <a href={selectedProject.liveDemoUrl} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary">
+                      <ExternalLinkIcon size={16} /> Live Demo
+                    </a>
+                  ) : (
+                    <span className="ds-btn ds-btn-primary opacity-50 cursor-not-allowed">
+                      <ExternalLinkIcon size={16} /> Live Demo (Pending)
+                    </span>
+                  )}
+                </div>
+
+                {/* Metrics */}
+                {selectedProject.metrics && selectedProject.metrics.length > 0 && !selectedProject.metrics[0]?.label.includes('TODO') && (
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {selectedProject.metrics.map((metric, i) => (
+                      <div key={i} className="ds-card p-5 flex flex-col gap-1">
+                        <span className="text-xs font-bold text-[var(--theme-text-muted)] uppercase tracking-wider">{metric.label}</span>
+                        <span className="text-lg font-extrabold text-[var(--theme-text)]">{metric.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {selectedProject.metrics && selectedProject.metrics[0]?.label.includes('TODO') && (
+                  <div className="w-full p-4 border border-dashed border-[var(--theme-border)] rounded-xl text-center text-sm font-bold text-[var(--theme-text-muted)] opacity-70">
+                    Metrics Placeholder (Update data layer)
+                  </div>
+                )}
+              </motion.div>
+
+              {/* Tech Stack */}
+              <motion.div variants={itemVariants} className="ds-card flex flex-wrap gap-2.5">
+                <div className="w-full text-xs font-bold text-[var(--theme-text-muted)] uppercase tracking-wider mb-2">Technologies Used</div>
+                {selectedProject.techStack.map((tech, i) => (
+                  <span key={i} className={`ds-tag ${tech.includes('TODO') ? 'bg-red-500/10 text-red-500 border-red-500/20' : ''}`}>
+                    {tech.includes('TODO') ? 'Pending Tech' : tech}
+                  </span>
+                ))}
+              </motion.div>
+
+              {/* Sections */}
+              <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <Section icon={InfoIcon} title="Overview" content={selectedProject.overview} />
+                <Section icon={TargetIcon} title="Problem Statement" content={selectedProject.problemStatement} />
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="ds-card">
+                <Section icon={LayoutTemplateIcon} title="Architecture" content={selectedProject.architecture} />
+                {selectedProject.architectureDiagram && !selectedProject.architectureDiagram.includes('TODO') ? (
+                  <div className="mt-6 w-full h-64 rounded-xl border border-[var(--theme-border)] overflow-hidden">
+                    <img src={selectedProject.architectureDiagram} alt="Architecture Diagram" className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="mt-6 w-full h-32 rounded-xl border border-dashed border-[var(--theme-border)] flex items-center justify-center bg-transparent text-[var(--theme-text-muted)] font-bold text-xs uppercase tracking-widest opacity-70">
+                    Architecture Diagram Placeholder
+                  </div>
+                )}
+              </motion.div>
               
-              <div className="flex flex-wrap gap-4">
-                {selectedProject.repositoryUrl !== 'Coming Soon' ? (
-                  <a href={selectedProject.repositoryUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md text-sm font-medium transition-colors">
-                    <GitBranchIcon size={16} /> Repository
-                  </a>
-                ) : (
-                  <span className="flex items-center gap-2 px-4 py-2 bg-white/5 text-white/30 rounded-md text-sm font-medium cursor-not-allowed">
-                    <GitBranchIcon size={16} /> Repository (Coming Soon)
-                  </span>
+              <motion.div variants={itemVariants}>
+                <ListSection icon={CodeIcon} title="Design Decisions" items={selectedProject.designDecisions} />
+              </motion.div>
+              
+              <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <ListSection icon={BookIcon} title="Challenges" items={selectedProject.challenges} />
+                <ListSection icon={ZapIcon} title="Solutions" items={selectedProject.solutions} />
+              </motion.div>
+
+              <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <ListSection icon={LayersIcon} title="Optimizations" items={selectedProject.optimizations} />
+                {selectedProject.lessonsLearned && selectedProject.lessonsLearned.length > 0 && !selectedProject.lessonsLearned[0]?.includes('TODO') && (
+                  <ListSection icon={BookIcon} title="Lessons Learned" items={selectedProject.lessonsLearned} />
                 )}
+              </motion.div>
 
-                {selectedProject.liveDemoUrl !== 'Coming Soon' ? (
-                  <a href={selectedProject.liveDemoUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 rounded-md text-sm font-medium transition-colors">
-                    <ExternalLinkIcon size={16} /> Live Demo
-                  </a>
-                ) : (
-                  <span className="flex items-center gap-2 px-4 py-2 bg-blue-500/5 text-blue-300/30 rounded-md text-sm font-medium cursor-not-allowed">
-                    <ExternalLinkIcon size={16} /> Live Demo (Coming Soon)
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2">
-              {selectedProject.techStack.map((tech, i) => (
-                <span key={i} className="px-3 py-1 bg-[#1e293b] text-[#94a3b8] rounded-full text-xs font-semibold border border-white/5">
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent my-2" />
-
-            {/* Sections */}
-            <Section icon={InfoIcon} title="Overview" content={selectedProject.overview} />
-            <Section icon={TargetIcon} title="Problem Statement" content={selectedProject.problemStatement} />
-            <Section icon={LayoutTemplateIcon} title="Architecture" content={selectedProject.architecture} />
-            
-            <ListSection icon={CodeIcon} title="Design Decisions" items={selectedProject.designDecisions} />
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <ListSection icon={BookIcon} title="Challenges" items={selectedProject.challenges} />
-              <ListSection icon={ZapIcon} title="Solutions" items={selectedProject.solutions} />
-            </div>
-
-            <ListSection icon={LayersIcon} title="Optimizations" items={selectedProject.optimizations} />
-            <ListSection icon={RocketIcon} title="Future Work" items={selectedProject.futureWork} />
-            
-          </div>
-        ) : (
-          <div className="flex-1 flex items-center justify-center text-white/50 h-full">
-            Select a project to view details
-          </div>
-        )}
+              <motion.div variants={itemVariants} className="ds-card">
+                <ListSection icon={RocketIcon} title="Future Work" items={selectedProject.futureWork} />
+              </motion.div>
+              
+            </motion.div>
+          ) : (
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="flex-1 flex flex-col items-center justify-center text-[var(--theme-text-muted)] h-full gap-4"
+            >
+              <LayoutTemplateIcon size={64} className="opacity-20" strokeWidth={1} />
+              <div className="font-medium">Select a project to view details</div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -103,25 +185,31 @@ export const ProjectsApp: React.FC = () => {
 
 const Section: React.FC<{ icon: React.ElementType, title: string, content: string }> = ({ icon: Icon, title, content }) => (
   <div className="flex flex-col gap-3">
-    <h3 className="text-xl font-semibold flex items-center gap-2 text-white/90">
-      <Icon size={20} className="text-blue-400" /> {title}
+    <h3 className="text-base font-bold flex items-center gap-2 text-[var(--theme-text)]">
+      <div className="p-1.5 bg-[var(--theme-accent)]/10 rounded-md text-[var(--theme-accent)]">
+        <Icon size={18} strokeWidth={2.5} />
+      </div>
+      {title}
     </h3>
-    <p className="text-white/70 leading-relaxed text-sm">
+    <p className="text-[var(--theme-text-muted)] leading-relaxed text-[13px] font-medium">
       {content}
     </p>
   </div>
 );
 
 const ListSection: React.FC<{ icon: React.ElementType, title: string, items: string[] }> = ({ icon: Icon, title, items }) => (
-  <div className="flex flex-col gap-3">
-    <h3 className="text-xl font-semibold flex items-center gap-2 text-white/90">
-      <Icon size={20} className="text-purple-400" /> {title}
+  <div className="flex flex-col gap-4">
+    <h3 className="text-base font-bold flex items-center gap-2 text-[var(--theme-text)]">
+      <div className="p-1.5 bg-[var(--theme-accent)]/10 rounded-md text-[var(--theme-accent)]">
+        <Icon size={18} strokeWidth={2.5} />
+      </div>
+      {title}
     </h3>
-    <ul className="list-none space-y-2">
+    <ul className="list-none space-y-3">
       {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-3 text-sm text-white/70 leading-relaxed">
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-500/50 mt-1.5 flex-shrink-0" />
-          {item}
+        <li key={i} className="flex items-start gap-3 text-[13px] font-medium text-[var(--theme-text-muted)] leading-relaxed">
+          <div className="w-1.5 h-1.5 rounded-full bg-purple-500/50 mt-2 flex-shrink-0" />
+          <span>{item}</span>
         </li>
       ))}
     </ul>

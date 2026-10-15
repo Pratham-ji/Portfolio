@@ -1,87 +1,30 @@
 import React from 'react';
-import { ChevronRightIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, GridIcon, ListIcon } from 'lucide-react';
+import styles from '../Explorer.module.css';
+import { FileSystemStore, FileNode } from '../store/FileSystemStore';
 
 interface BreadcrumbsProps {
-  currentPath: string;
-  history: string[];
-  historyIndex: number;
-  viewMode: 'grid' | 'list';
-  onNavigate: (path: string) => void;
-  onNavigateBack: () => void;
-  onNavigateForward: () => void;
-  onNavigateUp: () => void;
-  onSetViewMode: (mode: 'grid' | 'list') => void;
+  activeFolderId: string;
+  onNavigate: (id: string) => void;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
-  currentPath, history, historyIndex, viewMode, onNavigate, onNavigateBack, onNavigateForward, onNavigateUp, onSetViewMode
-}) => {
-  const parts = currentPath === '/' ? [] : currentPath.split('/').filter(Boolean);
-
-  const canGoBack = historyIndex > 0;
-  const canGoForward = historyIndex < history.length - 1;
-  const canGoUp = currentPath !== '/';
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ activeFolderId, onNavigate }) => {
+  const path = FileSystemStore.getPath(activeFolderId);
 
   return (
-    <div className="flex items-center gap-2 p-2 border-b border-white/10 bg-black/10">
-      <div className="flex items-center gap-1">
-        <button aria-label="Go Back" disabled={!canGoBack} onClick={onNavigateBack} className="p-1.5 rounded-md text-white/70 hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent">
-          <ArrowLeftIcon size={16} />
-        </button>
-        <button aria-label="Go Forward" disabled={!canGoForward} onClick={onNavigateForward} className="p-1.5 rounded-md text-white/70 hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent">
-          <ArrowRightIcon size={16} />
-        </button>
-        <button aria-label="Go Up" disabled={!canGoUp} onClick={onNavigateUp} className="p-1.5 rounded-md text-white/70 hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent">
-          <ArrowUpIcon size={16} />
-        </button>
-      </div>
-
-      <div className="flex-1 flex items-center gap-1 bg-black/20 rounded-md px-3 py-1.5 overflow-hidden border border-white/5">
-        <button aria-label="Home Directory" onClick={() => onNavigate('/')} className="text-sm text-white/70 hover:text-white flex-shrink-0">
-          Root
-        </button>
-        {parts.map((part, index) => {
-          const path = '/' + parts.slice(0, index + 1).join('/');
-          return (
-            <React.Fragment key={path}>
-              <ChevronRightIcon size={14} className="text-white/30 flex-shrink-0" />
-              <button aria-label={`Navigate to ${part}`}
-                onClick={() => onNavigate(path)}
-                className="text-sm text-white/70 hover:text-white truncate"
-              >
-                {part}
-              </button>
-            </React.Fragment>
-          );
-        })}
-      </div>
-
-      <div className="flex items-center gap-2">
-        <div className="relative">
-          <input 
-            type="text" 
-            placeholder="Search..." 
-            className="w-32 lg:w-48 bg-black/20 border border-white/5 rounded-md py-1 px-3 pl-8 text-sm text-white focus:outline-none focus:border-os-blue placeholder-white/30"
-          />
-          <svg className="w-3.5 h-3.5 absolute left-2.5 top-2 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </div>
-        <div className="flex items-center gap-1 bg-black/20 rounded-md p-0.5 border border-white/5">
-          <button aria-label="Grid View"
-            onClick={() => onSetViewMode('grid')} 
-            className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/80'}`}
+    <div className={styles.breadcrumbs} role="navigation" aria-label="Breadcrumb">
+      {path.map((node, i) => (
+        <React.Fragment key={node.id}>
+          <div 
+            className={styles.crumb} 
+            onClick={() => onNavigate(node.id)}
+            role="button"
+            tabIndex={0}
           >
-            <GridIcon size={14} />
-          </button>
-          <button aria-label="List View"
-            onClick={() => onSetViewMode('list')} 
-            className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/80'}`}
-          >
-            <ListIcon size={14} />
-          </button>
-        </div>
-      </div>
+            {node.name}
+          </div>
+          {i < path.length - 1 && <div className={styles.crumbSeparator}>/</div>}
+        </React.Fragment>
+      ))}
     </div>
   );
 };

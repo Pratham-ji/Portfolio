@@ -1,0 +1,83 @@
+.paperContainer {
+  background-color: var(--pos-paper-bg);
+  color: var(--pos-paper-fg);
+  font-family: var(--pos-font-sans);
+  border: 1px solid var(--pos-paper-border);
+  box-sizing: border-box;
+  overflow: auto;
+  position: relative;
+  /* Anti-glare text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Document Modes */
+.mode-resume {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  /* A resume looks like a physical sheet of A4 */
+  min-height: 1056px; 
+}
+
+.mode-markdown {
+  max-width: 65ch;
+  margin: 0 auto;
+  padding: 32px 16px;
+  line-height: 1.6;
+}
+
+.mode-blueprint {
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  font-family: var(--pos-font-mono); /* Technical vibe */
+}
+
+.mode-ebook {
+  max-width: 60ch;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-size: 1.1em;
+  line-height: 1.8;
+}
+
+/* Base typography normalization within Paper */
+.paperContainer h1, 
+.paperContainer h2, 
+.paperContainer h3 {
+  color: var(--pos-paper-fg);
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.paperContainer p {
+  margin-bottom: 1em;
+}
+
+.paperContainer code {
+  background-color: var(--pos-paper-code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: var(--pos-font-mono);
+  font-size: 0.9em;
+}
+
+.paperContainer ::selection {
+  background-color: var(--pos-paper-selection);
+}
+
+/* Print optimizations */
+@media print {
+  .paperContainer {
+    background-color: white !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+}

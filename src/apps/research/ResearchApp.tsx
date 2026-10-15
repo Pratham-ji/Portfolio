@@ -22,32 +22,32 @@ const publications = [
 
 export const ResearchApp: React.FC = () => {
   return (
-    <div className="w-full h-full bg-[#f4f4f5] text-[#18181b] p-8 overflow-y-auto">
-      <div className="max-w-3xl mx-auto flex flex-col gap-8 pb-12">
+    <div className="ds-app-container">
+      <div className="ds-app-content-inner w-full px-8 pt-8 pb-20 max-w-4xl">
         
-        <div className="flex items-center gap-4 border-b border-black/10 pb-6">
-          <div className="w-14 h-14 bg-red-500/10 text-red-600 flex items-center justify-center rounded-2xl">
-            <BookOpenIcon size={28} />
+        <div className="flex items-center gap-4 border-b border-[var(--theme-border)] pb-6">
+          <div className="w-12 h-12 bg-red-500/10 text-red-500 flex items-center justify-center rounded-xl">
+            <BookOpenIcon size={24} />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Research</h1>
-            <p className="text-black/50">Publications and technical articles</p>
+            <h1 className="text-3xl font-bold text-[var(--theme-text)]">Research</h1>
+            <p className="text-[var(--theme-text-muted)]">Publications and technical articles</p>
           </div>
         </div>
 
         <div className="flex flex-col gap-6">
           {publications.map((pub) => (
-            <article key={pub.id} className="bg-white p-6 rounded-2xl shadow-sm border border-black/5 flex flex-col gap-4">
+            <article key={pub.id} className="ds-card flex flex-col gap-4">
               <div>
-                <h3 className="text-xl font-bold text-black/90 mb-1 leading-snug">{pub.title}</h3>
-                <div className="text-sm font-medium text-red-600 mb-3">
+                <h3 className="text-xl font-bold text-[var(--theme-text)] mb-1 leading-snug">{pub.title}</h3>
+                <div className="text-sm font-medium text-red-500 mb-3">
                   {pub.journal} • {pub.year}
                 </div>
               </div>
               
-              <div className="bg-black/5 p-4 rounded-xl border border-black/5">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-black/40 mb-2">Abstract</h4>
-                <p className="text-sm text-black/70 leading-relaxed italic">
+              <div className="bg-[var(--theme-surface-hover)] p-4 rounded-xl border border-[var(--theme-border)]">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--theme-text-muted)] mb-2">Abstract</h4>
+                <p className="text-[13px] text-[var(--theme-text-muted)] leading-relaxed italic">
                   "{pub.abstract}"
                 </p>
               </div>
@@ -55,14 +55,14 @@ export const ResearchApp: React.FC = () => {
               <div className="flex items-center gap-4 mt-2">
                 <a 
                   href={pub.link} 
-                  className="flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/10 text-black/70 hover:text-black rounded-lg text-sm font-medium transition-colors"
+                  className="ds-btn ds-btn-secondary"
                   onClick={(e) => { e.preventDefault(); alert('Mock PDF Link'); }}
                 >
                   <FileTextIcon size={16} /> Read Paper
                 </a>
                 <a 
                   href={pub.link} 
-                  className="flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-colors"
+                  className="flex items-center gap-2 text-sm font-medium text-red-500 hover:text-red-600 transition-colors"
                   onClick={(e) => { e.preventDefault(); alert('Mock DOI Link'); }}
                 >
                   <ExternalLinkIcon size={16} /> DOI Link

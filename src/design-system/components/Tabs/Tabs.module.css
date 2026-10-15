@@ -1,0 +1,88 @@
+.tabsContainer {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.tabsContainer.horizontal {
+  flex-direction: column;
+}
+
+.tabsContainer.vertical {
+  flex-direction: row;
+}
+
+.tablist {
+  display: flex;
+  position: relative;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Material structural border */
+}
+
+.tabsContainer.vertical .tablist {
+  flex-direction: column;
+  border-bottom: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tablist::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  position: relative;
+  padding: var(--pos-space-8) var(--pos-space-16);
+  color: var(--pos-color-secondary);
+  font-family: var(--pos-font-sans);
+  font-size: var(--pos-text-ui);
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  transition: color 150ms ease;
+  z-index: 2; /* above indicator */
+}
+
+.tab[aria-selected="true"] {
+  color: var(--pos-color-primary);
+}
+
+.tab:focus-visible {
+  background-color: var(--pos-surface-3);
+  border-radius: var(--pos-radius-sm);
+}
+
+/* Indicator - strict translate and opacity only */
+.indicator {
+  position: absolute;
+  background-color: var(--pos-accent-interactive);
+  border-radius: var(--pos-radius-sm);
+  z-index: 1;
+  pointer-events: none;
+  transition: transform 200ms ease, width 200ms ease, height 200ms ease, opacity 200ms ease;
+}
+
+.tabsContainer.horizontal .indicator {
+  height: 2px;
+  bottom: 0;
+  border-radius: 2px 2px 0 0;
+}
+
+.tabsContainer.vertical .indicator {
+  width: 2px;
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+.tabPanel {
+  flex: 1;
+  padding: var(--pos-space-16) 0;
+}
+
+.tabsContainer.vertical .tabPanel {
+  padding: 0 var(--pos-space-16);
+}

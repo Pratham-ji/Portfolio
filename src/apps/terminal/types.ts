@@ -1,18 +1,29 @@
-import { ReactNode } from 'react';
-
-export interface HistoryEntry {
-  id: string;
-  type: 'input' | 'output' | 'error' | 'system';
-  content: ReactNode;
+export interface TerminalSegment {
+  text: string;
+  color?: string; // PrathamOS CSS var e.g. var(--pos-color-success)
+  bold?: boolean;
 }
 
-export interface TerminalContextValue {
-  history: HistoryEntry[];
-  currentPath: string;
-  inputHistory: string[];
-  pushHistory: (entry: Omit<HistoryEntry, 'id'>) => void;
-  clearHistory: () => void;
-  setCurrentPath: (path: string) => void;
-  addInputHistory: (input: string) => void;
-  closeTerminal: () => void;
+export interface TerminalLineData {
+  id: string;
+  segments: TerminalSegment[];
+  isInput?: boolean; // True if it's the user's echo'd input
+}
+
+export interface TerminalResult {
+  lines: TerminalLineData[];
+}
+
+export interface TerminalState {
+  history: TerminalLineData[];
+  cwd: string;
+  isProcessing: boolean;
+}
+
+export type TerminalCommandExecutor = (args: string[], cwd: string) => Promise<TerminalResult>;
+
+export interface TerminalCommandDef {
+  name: string;
+  description: string;
+  execute: TerminalCommandExecutor;
 }

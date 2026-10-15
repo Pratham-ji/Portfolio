@@ -1,0 +1,140 @@
+.topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--pos-shell-topbar-height, 32px);
+  /* Material Metal */
+  background: var(--pos-material-metal-bg, rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--pos-border-subtle, rgba(0, 0, 0, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  color: var(--pos-text-primary, #000);
+  font-size: 13px;
+  user-select: none;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+/* Dark mode support via global attribute or media query */
+:global([data-theme="dark"]) .topBar {
+  background: var(--pos-material-metal-bg-dark, rgba(30, 30, 30, 0.7));
+  border-bottom: 1px solid var(--pos-border-subtle-dark, rgba(255, 255, 255, 0.1));
+  color: var(--pos-text-primary-dark, #fff);
+}
+
+.leftSection, .rightSection {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.menuItem {
+  padding: 0 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: default;
+  transition: background-color 0.1s ease;
+}
+
+.menuItem:hover {
+  background-color: var(--pos-surface-hover, rgba(0, 0, 0, 0.05));
+}
+
+:global([data-theme="dark"]) .menuItem:hover {
+  background-color: var(--pos-surface-hover-dark, rgba(255, 255, 255, 0.1));
+}
+
+.icon {
+  font-size: 12px;
+}
+
+.centerSection {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.recruiterTourPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(10, 132, 255, 0.12);
+  border: 1px solid rgba(10, 132, 255, 0.45);
+  border-radius: 9999px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--pos-accent-interactive, #0A84FF);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(10, 132, 255, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: recruiterPulse 2.8s infinite ease-in-out;
+}
+
+.recruiterTourPill:hover {
+  background: rgba(10, 132, 255, 0.22);
+  border-color: rgba(10, 132, 255, 0.8);
+  box-shadow: 0 0 16px rgba(10, 132, 255, 0.45), 0 0 4px #0A84FF;
+  transform: translateY(-0.5px);
+}
+
+.recruiterTourPill:active {
+  transform: translateY(0.5px) scale(0.98);
+}
+
+.tourSparkle {
+  color: #0A84FF;
+  font-size: 11px;
+  display: inline-block;
+  animation: sparkleTwinkle 2s infinite ease-in-out;
+}
+
+.tourText {
+  color: inherit;
+}
+
+:global([data-theme="dark"]) .recruiterTourPill {
+  background: rgba(10, 132, 255, 0.18);
+  border-color: rgba(10, 132, 255, 0.55);
+  color: #38a0ff;
+  box-shadow: 0 0 12px rgba(10, 132, 255, 0.25);
+}
+
+@keyframes recruiterPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(10, 132, 255, 0.2), 0 0 0 0 rgba(10, 132, 255, 0);
+    border-color: rgba(10, 132, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(10, 132, 255, 0.45), 0 0 0 2px rgba(10, 132, 255, 0.15);
+    border-color: rgba(10, 132, 255, 0.75);
+  }
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25) rotate(15deg); opacity: 0.75; }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .menuItem {
+    transition: none;
+  }
+  .recruiterTourPill, .tourSparkle {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,49 @@
+.glassPanel {
+  position: relative;
+  box-sizing: border-box; /* Must never change box dimensions */
+  backdrop-filter: blur(20px) saturate(145%);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: var(--pos-light-rim-glass);
+  box-shadow: var(--pos-shadow-directional);
+  transition: background-color 200ms ease;
+  overflow: hidden; /* Contains noise */
+}
+
+/* Pseudo-element rim light */
+.glassPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Variants */
+.variant-default {
+  background: rgba(28, 28, 34, 0.68);
+}
+
+.variant-dynamicContent {
+  background: rgba(18, 18, 22, 0.86);
+}
+
+.variant-highContrast {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  background: rgba(38, 38, 46, 0.72);
+}
+
+.interactive:active {
+  background: rgba(45, 45, 55, 0.8);
+}

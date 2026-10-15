@@ -1,3 +1,1 @@
-import { ExplorerManifest } from './manifest';
-
-export { ExplorerManifest };
+export { ExplorerManifest as default } from './manifest';

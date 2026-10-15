@@ -1,0 +1,86 @@
+.scrollbarContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.viewport {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* Hide native scrollbars */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: 10px;
+  border-radius: 5px;
+  transition: opacity 200ms ease, background-color 200ms ease;
+  pointer-events: none;
+}
+
+.thumb {
+  position: absolute;
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: background-color 150ms ease;
+  pointer-events: auto;
+  cursor: default;
+}
+
+.thumb:hover, .thumb:active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Platform Styles */
+
+/* macOS: Overlay */
+.platform-mac .track {
+  opacity: 0;
+  width: 8px;
+}
+.scrollbarContainer:hover .platform-mac .track,
+.platform-mac .track.active {
+  opacity: 1;
+}
+
+/* Windows: Persistent */
+.platform-windows .track {
+  opacity: 1;
+  background-color: var(--pos-surface-1);
+  width: 14px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+.platform-windows .thumb {
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Linux: Minimal */
+.platform-linux .track {
+  opacity: 1;
+  width: 6px;
+}
+
+/* Reduced Transparency */
+.reduced-transparency .thumb {
+  background-color: var(--pos-surface-4);
+}
+.reduced-transparency .thumb:hover, .reduced-transparency .thumb:active {
+  background-color: var(--pos-surface-5);
+}

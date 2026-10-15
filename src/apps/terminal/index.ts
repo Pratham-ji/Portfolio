@@ -1,3 +1,1 @@
-import { TerminalManifest } from './manifest';
-
-export { TerminalManifest };
+export { TerminalManifest as default } from './manifest';

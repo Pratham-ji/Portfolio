@@ -1,0 +1,48 @@
+.avatarContainer {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--pos-surface-3); /* Solid surface fallback */
+  color: var(--pos-color-primary);
+  /* Material 09 STRICT: NO filters, NO gradients, NO shadows */
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover; /* STRICT Requirement */
+}
+
+.initials {
+  font-family: var(--pos-font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* Status Badge */
+.statusBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  border: 2px solid var(--pos-surface-1); /* matches common background to cut out */
+}
+
+.status-online { background-color: var(--pos-color-success); }
+.status-offline { background-color: var(--pos-surface-4); }
+.status-busy { background-color: var(--pos-color-error); }
+.status-away { background-color: var(--pos-color-warning); }
+
+/* Sizes */
+.size-sm { width: 24px; height: 24px; font-size: 10px; }
+.size-md { width: 36px; height: 36px; font-size: 14px; }
+.size-lg { width: 48px; height: 48px; font-size: 18px; }
+
+/* Status sizes mapped to avatar sizes */
+.size-sm .statusBadge { width: 6px; height: 6px; border-width: 1px; }
+.size-md .statusBadge { width: 10px; height: 10px; }
+.size-lg .statusBadge { width: 12px; height: 12px; }

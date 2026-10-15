@@ -1,0 +1,24 @@
+.tooltipContainer {
+  position: relative;
+  display: inline-flex;
+}
+
+.tooltip {
+  position: absolute;
+  pointer-events: none;
+  white-space: nowrap;
+  background-color: var(--pos-surface-5);
+  color: var(--pos-color-primary);
+  padding: var(--pos-space-4) var(--pos-space-8);
+  border-radius: var(--pos-radius-sm);
+  font-size: var(--pos-text-caption);
+  font-family: var(--pos-font-sans);
+  box-shadow: var(--pos-shadow-ambient);
+  /* The z-index will be dynamically assigned via LayerManager */
+}
+
+/* Base Position Classes - we use transforms for positioning so we can easily animate opacity/scale */
+.pos-top { bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: var(--pos-space-8); }
+.pos-bottom { top: 100%; left: 50%; transform: translateX(-50%); margin-top: var(--pos-space-8); }
+.pos-left { right: 100%; top: 50%; transform: translateY(-50%); margin-right: var(--pos-space-8); }
+.pos-right { left: 100%; top: 50%; transform: translateY(-50%); margin-left: var(--pos-space-8); }

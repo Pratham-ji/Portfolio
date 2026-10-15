@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DownloadIcon, PrinterIcon, FileTextIcon, AlertCircleIcon } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export const ResumeApp: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const RESUME_URL = '/resume.pdf'; // Path to the PDF in public folder
+  const RESUME_URL = '/resume.pdf';
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -27,7 +28,6 @@ export const ResumeApp: React.FC = () => {
       return;
     }
     
-    // Create an invisible iframe for printing
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = RESUME_URL;
@@ -44,55 +44,66 @@ export const ResumeApp: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full bg-[#323639] flex flex-col">
+    <div className="ds-app-container flex-col">
       {/* PDF Viewer Toolbar */}
-      <div className="h-14 bg-[#323639] border-b border-black/30 flex items-center justify-between px-4 shadow-sm z-10 flex-shrink-0">
-        <div className="flex items-center gap-4 text-white/90">
-          <FileTextIcon size={20} />
-          <span className="text-sm font-medium">pratham_resume.pdf</span>
+      <div className="h-16 bg-[var(--theme-surface)] border-b border-[var(--theme-border)] flex items-center justify-between px-6 shadow-sm z-10 flex-shrink-0">
+        <div className="flex items-center gap-4 text-[var(--theme-text)]">
+          <div className="p-2 bg-[var(--theme-accent)]/10 text-[var(--theme-accent)] rounded-lg">
+            <FileTextIcon size={20} strokeWidth={2.5} />
+          </div>
+          <span className="text-sm font-bold">pratham_resume.pdf</span>
         </div>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {!isMobile && (
-            <button 
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handlePrint}
-              className="p-2 hover:bg-white/10 rounded-full text-white/80 hover:text-white transition-colors"
+              className="ds-btn ds-btn-ghost"
               title="Print"
               aria-label="Print Resume"
             >
-              <PrinterIcon size={20} />
-            </button>
+              <PrinterIcon size={18} />
+            </motion.button>
           )}
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleDownload}
-            className="p-2 hover:bg-white/10 rounded-full text-white/80 hover:text-white transition-colors"
+            className="ds-btn ds-btn-primary shadow-md shadow-blue-500/20"
             title="Download"
             aria-label="Download Resume"
           >
-            <DownloadIcon size={20} />
-          </button>
+            <DownloadIcon size={18} strokeWidth={2.5} />
+            <span className="text-sm">Download</span>
+          </motion.button>
         </div>
       </div>
 
       {/* PDF Document Container */}
-      <div className="flex-1 overflow-hidden flex flex-col items-center justify-center bg-[#525659]">
+      <div className="flex-1 overflow-hidden flex flex-col items-center justify-center bg-transparent/50 relative">
         {isMobile ? (
-          <div className="flex flex-col items-center justify-center p-8 text-center max-w-sm">
-            <div className="w-20 h-20 bg-blue-500/10 text-blue-400 rounded-full flex items-center justify-center mb-6">
-              <FileTextIcon size={40} />
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            className="ds-card flex flex-col items-center justify-center p-8 text-center max-w-sm m-6"
+          >
+            <div className="w-24 h-24 bg-[var(--theme-accent)]/10 text-[var(--theme-accent)] rounded-full flex items-center justify-center mb-6 shadow-inner">
+              <FileTextIcon size={48} strokeWidth={1.5} />
             </div>
-            <h2 className="text-xl font-bold text-white mb-2">Resume Ready</h2>
-            <p className="text-white/60 text-sm mb-8">
+            <h2 className="text-2xl font-extrabold text-[var(--theme-text)] mb-3">Resume Ready</h2>
+            <p className="text-[var(--theme-text-muted)] text-[15px] font-medium mb-8 leading-relaxed">
               For the best reading experience on mobile devices, please download the PDF directly.
             </p>
-            <button 
+            <motion.button 
+              whileTap={{ scale: 0.95 }}
               onClick={handleDownload}
-              className="flex items-center gap-2 px-6 py-3 bg-[#0a84ff] hover:bg-blue-500 text-white rounded-full font-medium transition-colors"
+              className="ds-btn ds-btn-primary w-full py-4 shadow-lg shadow-blue-500/30"
             >
-              <DownloadIcon size={18} />
+              <DownloadIcon size={20} strokeWidth={2.5} />
               Download PDF
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         ) : (
           <div className="w-full h-full p-0 relative">
             <object 
@@ -101,19 +112,21 @@ export const ResumeApp: React.FC = () => {
               className="w-full h-full"
               aria-label="Resume PDF Viewer"
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#323639] p-8 text-center">
-                <AlertCircleIcon size={48} className="text-white/20 mb-4" />
-                <h3 className="text-lg font-medium text-white mb-2">Unable to display PDF</h3>
-                <p className="text-white/50 text-sm max-w-md mb-6">
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-transparent p-8 text-center">
+                <AlertCircleIcon size={64} className="text-[var(--theme-text-muted)] opacity-30 mb-6" strokeWidth={1} />
+                <h3 className="text-2xl font-bold text-[var(--theme-text)] mb-3">Unable to display PDF</h3>
+                <p className="text-[var(--theme-text-muted)] text-base font-medium max-w-md mb-8">
                   It appears your browser doesn't support embedded PDFs or a plugin is blocking it.
                 </p>
-                <button 
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={handleDownload}
-                  className="flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-medium transition-colors border border-white/10"
+                  className="ds-btn ds-btn-primary px-8 py-4 shadow-lg shadow-blue-500/20"
                 >
-                  <DownloadIcon size={18} />
+                  <DownloadIcon size={20} strokeWidth={2.5} />
                   Download Instead
-                </button>
+                </motion.button>
               </div>
             </object>
           </div>

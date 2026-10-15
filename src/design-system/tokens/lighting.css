@@ -1,0 +1,21 @@
+/* ==========================================================================
+   PRATHAMOS v3.2 — LIGHTING TOKEN REGISTRY
+   ========================================================================== */
+
+:root,
+[data-theme="system"],
+[data-theme="dark"] {
+  /* GLOBAL ENVIRONMENTAL LIGHTING RIG (35° Elevation / 135° Azimuth) */
+  --pos-light-key-angle:      135deg;
+  --pos-light-rim-glass:      1px solid rgba(255, 255, 255, 0.18);
+  --pos-light-rim-metal:      1px solid rgba(255, 255, 255, 0.06);
+  --pos-light-specular-glass: rgba(255, 255, 255, 0.22);
+  --pos-light-specular-metal: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] {
+  --pos-light-rim-glass:      1px solid rgba(0, 0, 0, 0.1);
+  --pos-light-rim-metal:      1px solid rgba(0, 0, 0, 0.05);
+  --pos-light-specular-glass: rgba(255, 255, 255, 0.6);
+  --pos-light-specular-metal: rgba(255, 255, 255, 0.4);
+}

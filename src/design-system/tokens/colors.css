@@ -1,0 +1,87 @@
+/* ==========================================================================
+   PRATHAMOS v3.2 — COLORS TOKEN REGISTRY
+   ========================================================================== */
+
+:root,
+[data-theme="system"] {
+  /* ========================================================================
+     1. SURFACE HIERARCHY (Deep OLED Charcoal Base)
+     ======================================================================== */
+  --pos-surface-0: #0C0C0F; /* Root OS Canvas */
+  --pos-surface-1: #131317; /* Base application window frames */
+  --pos-surface-2: #1C1C22; /* Content cards, structural partitions, sidebars */
+  --pos-surface-3: #282830; /* Interactive hover states, inputs, dropdowns */
+  --pos-surface-4: #35353F; /* Active pressed states, floating toolbars, badges */
+  --pos-surface-5: #42424E; /* Temporary overlays, tooltips, selection drag rectangles */
+
+  /* ========================================================================
+     2. THE 95/5 INTERACTION COLOR LAW
+     ======================================================================== */
+  --pos-accent-interactive: #0A84FF; /* Soft Apple Blue — 95% of interactive states */
+  --pos-accent-brand:       #D71921; /* Pratham Red — Identity (boot mark, optical trace) */
+  
+  --pos-color-primary:      #FFFFFF;
+  --pos-color-secondary:    #8E8E93;
+  --pos-color-success:      #30D158;
+  --pos-color-warning:      #FF9F0A;
+  --pos-color-error:        #FF453A;
+
+  /* Paper Tokens (Dark Default) */
+  --pos-paper-bg:           #161514;
+  --pos-paper-fg:           #E2DFD9;
+  --pos-paper-border:       rgba(255, 255, 255, 0.1);
+  --pos-paper-code-bg:      #1E1D1C;
+  --pos-paper-selection:    rgba(226, 223, 217, 0.2);
+}
+
+[data-theme="dark"] {
+  --pos-surface-0: #0C0C0F;
+  --pos-surface-1: #131317;
+  --pos-surface-2: #1C1C22;
+  --pos-surface-3: #282830;
+  --pos-surface-4: #35353F;
+  --pos-surface-5: #42424E;
+
+  --pos-accent-interactive: #0A84FF;
+  --pos-accent-brand:       #D71921;
+  
+  --pos-color-primary:      #FFFFFF;
+  --pos-color-secondary:    #8E8E93;
+  --pos-color-success:      #30D158;
+  --pos-color-warning:      #FF9F0A;
+  --pos-color-error:        #FF453A;
+
+  /* Paper Tokens (Dark) */
+  --pos-paper-bg:           #161514;
+  --pos-paper-fg:           #E2DFD9;
+  --pos-paper-border:       rgba(255, 255, 255, 0.1);
+  --pos-paper-code-bg:      #1E1D1C;
+  --pos-paper-selection:    rgba(226, 223, 217, 0.2);
+}
+
+[data-theme="light"] {
+  /* Inverted Surfaces (Bead-blasted Platinum base) */
+  --pos-surface-0: #F4F4F6;
+  --pos-surface-1: #EBEBEF;
+  --pos-surface-2: #E1E1E6;
+  --pos-surface-3: #D6D6DE;
+  --pos-surface-4: #CCCCC6;
+  --pos-surface-5: #C2C2CD;
+
+  --pos-accent-interactive: #007AFF;
+  --pos-accent-brand:       #D71921;
+
+  /* Text & Border Inversions for Light Mode */
+  --pos-color-primary:      #1C1C1E;
+  --pos-color-secondary:    #636366;
+  --pos-color-success:      #34C759;
+  --pos-color-warning:      #FF9500;
+  --pos-color-error:        #FF3B30;
+
+  /* Paper Tokens (Light) */
+  --pos-paper-bg:           #F7F5F2;
+  --pos-paper-fg:           #1A1A1E;
+  --pos-paper-border:       rgba(0, 0, 0, 0.1);
+  --pos-paper-code-bg:      #EBE8E3;
+  --pos-paper-selection:    rgba(26, 26, 30, 0.2);
+}

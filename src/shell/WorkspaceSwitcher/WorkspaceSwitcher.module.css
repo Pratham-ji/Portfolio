@@ -1,0 +1,116 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 15000;
+  display: flex;
+  flex-direction: column;
+}
+
+.switcherTopBar {
+  width: 100%;
+  height: 160px;
+  background-color: var(--pos-surface-0, rgba(255, 255, 255, 0.5));
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-bottom: 1px solid var(--pos-border-subtle, rgba(0,0,0,0.1));
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  transform-origin: top;
+  animation: slideDown 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+:global([data-theme="dark"]) .switcherTopBar {
+  background-color: var(--pos-surface-0-dark, rgba(30, 30, 30, 0.5));
+  border-color: var(--pos-border-subtle-dark, rgba(255, 255, 255, 0.1));
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switcherTopBar { animation: none; }
+}
+
+.workspaceTrack {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.workspaceCard {
+  width: 180px;
+  height: 100px;
+  border-radius: var(--pos-radius-lg, 12px);
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+  position: relative;
+  will-change: transform;
+}
+
+.workspaceCard:active {
+  cursor: grabbing;
+}
+
+.previewPlaceholder {
+  width: 100%;
+  flex: 1;
+  background-color: var(--pos-surface-2, rgba(0,0,0,0.2));
+  border-radius: var(--pos-radius-md, 8px);
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+:global([data-theme="dark"]) .previewPlaceholder {
+  background-color: var(--pos-surface-2-dark, rgba(255,255,255,0.2));
+}
+
+.workspaceCard.active .previewPlaceholder {
+  border-color: var(--pos-color-primary, #007aff);
+}
+
+.workspaceName {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pos-text-primary, #000);
+}
+
+:global([data-theme="dark"]) .workspaceName {
+  color: var(--pos-text-primary-dark, #fff);
+}
+
+.addWorkspaceBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--pos-surface-1, rgba(255, 255, 255, 0.5));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--pos-text-primary, #000);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+:global([data-theme="dark"]) .addWorkspaceBtn {
+  background-color: var(--pos-surface-1-dark, rgba(50, 50, 50, 0.5));
+  color: var(--pos-text-primary-dark, #fff);
+}
+
+.addWorkspaceBtn:hover {
+  background-color: var(--pos-surface-hover, rgba(0, 0, 0, 0.1));
+}

@@ -1,0 +1,32 @@
+.statusAreaContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 4px;
+}
+
+.widgetItem {
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  height: 100%;
+  cursor: default;
+  transition: background-color 0.1s ease;
+  border-radius: var(--pos-radius-sm, 4px);
+  font-size: 13px;
+  user-select: none;
+}
+
+.widgetItem:hover {
+  background-color: var(--pos-surface-hover, rgba(0, 0, 0, 0.05));
+}
+
+:global([data-theme="dark"]) .widgetItem:hover {
+  background-color: var(--pos-surface-hover-dark, rgba(255, 255, 255, 0.1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .widgetItem {
+    transition: none;
+  }
+}

@@ -1,0 +1,64 @@
+.switchContainer {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+
+.track {
+  position: relative;
+  border-radius: var(--pos-radius-full);
+  background-color: var(--pos-surface-3); /* Track Surface 3 */
+  transition: background-color 200ms ease;
+}
+
+.track[data-checked="true"] {
+  background-color: var(--pos-accent-interactive); /* Interactive Blue, NOT Green */
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  background-color: var(--pos-surface-5); /* Thumb Surface 5 */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.switchContainer:focus-visible .track {
+  box-shadow: 0 0 0 2px var(--pos-accent-interactive);
+}
+
+.switchContainer[data-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.size-sm .track {
+  width: 28px;
+  height: 16px;
+}
+.size-sm .thumb {
+  width: 12px;
+  height: 12px;
+}
+
+.size-md .track {
+  width: 44px;
+  height: 24px;
+}
+.size-md .thumb {
+  width: 20px;
+  height: 20px;
+}
+
+.size-lg .track {
+  width: 52px;
+  height: 32px;
+}
+.size-lg .thumb {
+  width: 28px;
+  height: 28px;
+}

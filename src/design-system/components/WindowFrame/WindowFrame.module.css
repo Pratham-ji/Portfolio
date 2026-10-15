@@ -1,0 +1,64 @@
+.windowFrame {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--pos-shadow-modal);
+  border-radius: var(--pos-radius-win);
+  background: var(--pos-surface-1); /* Base Material 02 Metal */
+  border-top: var(--pos-light-rim-metal);
+}
+
+.titleBar {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 var(--pos-space-16);
+  user-select: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* The drag region logic will be handled by the OS WindowManager later,
+     but we leave it visually empty where possible. */
+}
+
+.trafficLights {
+  display: flex;
+  align-items: center;
+  gap: var(--pos-space-8);
+  width: 60px;
+}
+
+.trafficLight {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: transparent;
+  transition: background-color 100ms ease;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.trafficLights:hover .lightClose { background-color: var(--pos-color-error); }
+.trafficLights:hover .lightMinimize { background-color: var(--pos-color-warning); }
+.trafficLights:hover .lightMaximize { background-color: var(--pos-color-success); }
+
+.title {
+  flex: 1;
+  text-align: center;
+  color: var(--pos-color-primary);
+  font-family: var(--pos-font-sans);
+  font-size: var(--pos-text-ui);
+  font-weight: 600;
+  letter-spacing: var(--pos-tracking-wide);
+  pointer-events: none; /* Allows dragging through the text */
+}
+
+.spacer {
+  width: 60px;
+}
+
+.content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}

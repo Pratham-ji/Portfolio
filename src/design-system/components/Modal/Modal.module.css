@@ -1,0 +1,48 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* The overlay also acts as the backdrop click target */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  box-shadow: var(--pos-shadow-modal);
+  overflow: hidden;
+}
+
+/* Variants */
+
+.variant-dialog {
+  border-radius: var(--pos-radius-lg);
+  min-width: 320px;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.variant-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+}
+
+.variant-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: var(--pos-radius-lg) var(--pos-radius-lg) 0 0;
+  max-height: 90vh;
+}
+
+.variant-popover {
+  /* Simplified popover for demo; in reality requires positioning logic */
+  border-radius: var(--pos-radius-md);
+  min-width: 200px;
+}

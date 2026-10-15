@@ -1,0 +1,29 @@
+.sidebarContainer {
+  display: flex;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+  background-color: var(--pos-surface-2); /* Material 02 Content Cards/Sidebars */
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.contentWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0; /* allows text truncation if deeply nested */
+  overflow: hidden;
+}
+
+.splitterWrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px; /* Hit area matches Splitter */
+  transform: translateX(50%); /* Center over border */
+  z-index: 10;
+}

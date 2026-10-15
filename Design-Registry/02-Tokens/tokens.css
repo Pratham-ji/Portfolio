@@ -1,0 +1,118 @@
+/* ==========================================================================
+   PRATHAMOS v3.2 — MASTER TOKEN REGISTRY
+   ==========================================================================
+   Author: Principal Architecture Team (Apple & Google)
+   Description: Absolute source of truth for the PrathamOS Design System.
+   Zero arbitrary values allowed. All UI must reference these tokens.
+   ========================================================================== */
+
+:root {
+  /* ========================================================================
+     1. SURFACE HIERARCHY (Deep OLED Charcoal Base)
+     ======================================================================== */
+  --pos-surface-0: #0C0C0F; /* Root OS Canvas */
+  --pos-surface-1: #131317; /* Base application window frames */
+  --pos-surface-2: #1C1C22; /* Content cards, structural partitions, sidebars */
+  --pos-surface-3: #282830; /* Interactive hover states, inputs, dropdowns */
+  --pos-surface-4: #35353F; /* Active pressed states, floating toolbars, badges */
+  --pos-surface-5: #42424E; /* Temporary overlays, tooltips, selection drag rectangles */
+
+  /* ========================================================================
+     2. THE 95/5 INTERACTION COLOR LAW
+     ======================================================================== */
+  --pos-accent-interactive: #0A84FF; /* Soft Apple Blue — 95% of interactive states */
+  --pos-accent-brand:       #D71921; /* Pratham Red — Identity (boot mark, optical trace, milestones) */
+  --pos-color-primary:      #FFFFFF;
+  --pos-color-secondary:    #8E8E93;
+  --pos-color-success:      #30D158;
+  --pos-color-warning:      #FF9F0A;
+  --pos-color-error:        #FF453A;
+
+  /* ========================================================================
+     3. GLOBAL ENVIRONMENTAL LIGHTING RIG (35° Elevation / 135° Azimuth)
+     ======================================================================== */
+  --pos-light-key-angle:      135deg;
+  --pos-light-rim-glass:      1px solid rgba(255, 255, 255, 0.18);
+  --pos-light-rim-metal:      1px solid rgba(255, 255, 255, 0.06);
+  --pos-light-specular-glass: rgba(255, 255, 255, 0.22);
+  --pos-light-specular-metal: rgba(255, 255, 255, 0.08);
+
+  /* ========================================================================
+     4. ADAPTIVE SHADOW SYSTEM (Additive Dark Mode)
+     ======================================================================== */
+  --pos-shadow-ambient:     0 2px 6px rgba(0, 0, 0, 0.4);
+  --pos-shadow-directional: 0 8px 20px -4px rgba(0, 0, 0, 0.6), inset 0 1px 0 var(--pos-light-specular-metal);
+  --pos-shadow-modal:       0 32px 64px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0 var(--pos-light-specular-glass);
+
+  /* ========================================================================
+     5. SPATIAL SCALE (Strict 4px Increments)
+     ======================================================================== */
+  --pos-space-4:  4px;
+  --pos-space-8:  8px;
+  --pos-space-12: 12px;
+  --pos-space-16: 16px;
+  --pos-space-20: 20px;
+  --pos-space-24: 24px;
+  --pos-space-28: 28px;
+  --pos-space-32: 32px;
+  --pos-space-36: 36px;
+  --pos-space-40: 40px;
+  --pos-space-44: 44px;
+  --pos-space-48: 48px;
+  --pos-space-52: 52px;
+  --pos-space-56: 56px;
+  --pos-space-60: 60px;
+  --pos-space-64: 64px;
+  --pos-space-68: 68px;
+  --pos-space-72: 72px;
+  --pos-space-76: 76px;
+  --pos-space-80: 80px;
+  --pos-space-84: 84px;
+  --pos-space-88: 88px;
+  --pos-space-92: 92px;
+  --pos-space-96: 96px;
+
+  /* ========================================================================
+     CORNER RADIUS SCALE
+     ======================================================================== */
+  --pos-radius-sm:   6px;
+  --pos-radius-md:   10px;
+  --pos-radius-lg:   16px;
+  --pos-radius-win:  24px;
+  --pos-radius-dock: 28px;
+  --pos-radius-pill: 9999px;
+
+  /* ========================================================================
+     6. TYPOGRAPHY FALLBACK CHAIN
+     ======================================================================== */
+  --pos-font-sans: "Inter Variable", "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI Variable", sans-serif;
+  --pos-font-mono: "JetBrains Mono", "SF Mono", monospace;
+}
+
+/* ==========================================================================
+   ADAPTIVE THEMING: SUBTRACTIVE LIGHT MODE
+   ========================================================================== */
+[data-theme="light"] {
+  /* Inverted Surfaces (Bead-blasted Platinum base) */
+  --pos-surface-0: #F4F4F6;
+  --pos-surface-1: #EBEBEF;
+  --pos-surface-2: #E1E1E6;
+  --pos-surface-3: #D6D6DE;
+  --pos-surface-4: #CCCCC6;
+  --pos-surface-5: #C2C2CD;
+
+  /* Text & Border Inversions for Light Mode */
+  --pos-color-primary:   #1C1C1E;
+  --pos-color-secondary: #636366;
+  
+  /* Specular overrides for Light Mode */
+  --pos-light-rim-glass:      1px solid rgba(0, 0, 0, 0.1);
+  --pos-light-rim-metal:      1px solid rgba(0, 0, 0, 0.05);
+  --pos-light-specular-glass: rgba(255, 255, 255, 0.6);
+  --pos-light-specular-metal: rgba(255, 255, 255, 0.4);
+
+  /* Subtractive Shadows */
+  --pos-shadow-ambient:     0 2px 6px rgba(0, 0, 0, 0.06);
+  --pos-shadow-directional: 0 8px 20px -4px rgba(0, 0, 0, 0.10);
+  --pos-shadow-modal:       0 32px 64px -12px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}

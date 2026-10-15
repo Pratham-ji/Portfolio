@@ -1,0 +1,60 @@
+.menuContainer {
+  position: absolute;
+  top: var(--pos-shell-topbar-height, 32px);
+  left: 12px;
+  width: 240px;
+  background-color: var(--pos-material-glass-bg, rgba(255, 255, 255, 0.7));
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--pos-border-subtle, rgba(0,0,0,0.1));
+  border-radius: var(--pos-radius-md, 8px);
+  box-shadow: var(--pos-shadow-md, 0 8px 24px rgba(0,0,0,0.15));
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  z-index: 25000;
+  animation: scaleIn 0.1s ease-out;
+  transform-origin: top left;
+}
+
+:global([data-theme="dark"]) .menuContainer {
+  background-color: var(--pos-material-glass-bg-dark, rgba(40, 40, 40, 0.7));
+  border-color: var(--pos-border-subtle-dark, rgba(255, 255, 255, 0.1));
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menuContainer { animation: none; }
+}
+
+.menuItem {
+  padding: 6px 16px;
+  border-radius: var(--pos-radius-sm, 4px);
+  font-size: 13px;
+  color: var(--pos-text-primary, #000);
+  cursor: default;
+  user-select: none;
+}
+
+:global([data-theme="dark"]) .menuItem {
+  color: var(--pos-text-primary-dark, #fff);
+}
+
+.menuItem:hover {
+  background-color: var(--pos-color-primary, #007aff);
+  color: #fff;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--pos-border-subtle, rgba(0,0,0,0.1));
+  margin: 4px 0;
+}
+
+:global([data-theme="dark"]) .divider {
+  background-color: var(--pos-border-subtle-dark, rgba(255, 255, 255, 0.1));
+}

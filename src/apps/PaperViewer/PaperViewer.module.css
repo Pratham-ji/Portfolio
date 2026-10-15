@@ -1,0 +1,627 @@
+/* ==========================================================================
+   PAPERVIEWER — MATERIAL 05 (PAPER) STYLES
+   ========================================================================== */
+
+/* Design Tokens & Theme Variables */
+.paperViewerRoot {
+  --pv-bg-dark: #161514;
+  --pv-fg-dark: #E2DFD9;
+  --pv-border-dark: #2D2A26;
+  --pv-sidebar-bg-dark: #121110;
+  --pv-card-bg-dark: #1C1B19;
+  --pv-hover-dark: #262421;
+  --pv-code-bg-dark: #1E1D1A;
+
+  --pv-bg-light: #F7F5F2;
+  --pv-fg-light: #1A1A1E;
+  --pv-border-light: #E5E0D8;
+  --pv-sidebar-bg-light: #EFECE6;
+  --pv-card-bg-light: #FFFFFF;
+  --pv-hover-light: #E5E1D8;
+  --pv-code-bg-light: #ECE8E1;
+
+  /* Default Dark Mode: Warm E-Ink Charcoal */
+  --pv-bg: var(--pv-bg-dark);
+  --pv-fg: var(--pv-fg-dark);
+  --pv-border: var(--pv-border-dark);
+  --pv-sidebar-bg: var(--pv-sidebar-bg-dark);
+  --pv-card-bg: var(--pv-card-bg-dark);
+  --pv-hover: var(--pv-hover-dark);
+  --pv-code-bg: var(--pv-code-bg-dark);
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--pv-bg);
+  color: var(--pv-fg);
+  font-family: var(--pos-font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  overflow: hidden;
+  user-select: text;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light Theme Overrides */
+:global([data-theme="light"]) .paperViewerRoot {
+  --pv-bg: var(--pv-bg-light);
+  --pv-fg: var(--pv-fg-light);
+  --pv-border: var(--pv-border-light);
+  --pv-sidebar-bg: var(--pv-sidebar-bg-light);
+  --pv-card-bg: var(--pv-card-bg-light);
+  --pv-hover: var(--pv-hover-light);
+  --pv-code-bg: var(--pv-code-bg-light);
+}
+
+/* ==========================================================================
+   TOP ACTION TOOLBAR (44px)
+   ========================================================================== */
+
+.toolbar {
+  height: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: rgba(22, 21, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--pv-border);
+  z-index: 20;
+}
+
+:global([data-theme="light"]) .toolbar {
+  background-color: rgba(247, 245, 242, 0.9);
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--pv-fg);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.iconButton:hover {
+  opacity: 1;
+  background-color: var(--pv-hover);
+  border-color: var(--pv-border);
+}
+
+.iconButtonActive {
+  background-color: var(--pv-hover);
+  border-color: var(--pv-border);
+  opacity: 1;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--pv-border);
+  background-color: var(--pv-card-bg);
+  color: var(--pv-fg);
+  cursor: pointer;
+  transition: all 120ms ease;
+  white-space: nowrap;
+}
+
+.actionButton:hover {
+  background-color: var(--pv-hover);
+  border-color: var(--pos-accent-interactive, #0A84FF);
+}
+
+.actionButtonPrimary {
+  background-color: var(--pos-accent-interactive, #0A84FF);
+  color: #FFFFFF;
+  border-color: var(--pos-accent-interactive, #0A84FF);
+}
+
+.actionButtonPrimary:hover {
+  opacity: 0.92;
+}
+
+.titleArea {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.documentTitle {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.readingBadge {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background-color: var(--pv-hover);
+  border: 1px solid var(--pv-border);
+  color: var(--pv-fg);
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   SPLIT WORKSPACE LAYOUT
+   ========================================================================== */
+
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Collapsible Document Sidebar (220px) */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background-color: var(--pv-sidebar-bg);
+  border-right: 1px solid var(--pv-border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: margin-left 240ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.sidebarCollapsed {
+  margin-left: -220px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebarHeader {
+  padding: 12px 14px 8px 14px;
+  border-bottom: 1px solid var(--pv-border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebarLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.sidebarSearch {
+  width: 100%;
+  height: 26px;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid var(--pv-border);
+  background-color: var(--pv-card-bg);
+  color: var(--pv-fg);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sidebarSearch:focus {
+  border-color: var(--pos-accent-interactive, #0A84FF);
+}
+
+.sidebarList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--pv-fg);
+  cursor: pointer;
+  text-align: left;
+  font-size: 12px;
+  transition: all 100ms ease;
+  user-select: none;
+}
+
+.sidebarItem:hover {
+  background-color: var(--pv-hover);
+}
+
+.sidebarItemActive {
+  background-color: var(--pv-card-bg);
+  border-color: var(--pv-border);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.sidebarItemIcon {
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.sidebarItemTitle {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebarItemMeta {
+  font-size: 10px;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   MAIN DOCUMENT AREA
+   ========================================================================== */
+
+.contentArea {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 36px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--pv-bg);
+  scroll-behavior: smooth;
+}
+
+/* Centered Paper Sheet (max-width 840px, padding 48px 56px, subtle shadow) */
+.paperSheet {
+  width: 100%;
+  max-width: 840px;
+  min-height: 1024px;
+  padding: 48px 56px;
+  box-sizing: border-box;
+  background-color: var(--pv-card-bg);
+  border: 1px solid var(--pv-border);
+  border-radius: 6px;
+  box-shadow: 
+    0 4px 20px -2px rgba(0, 0, 0, 0.25),
+    0 1px 3px rgba(0, 0, 0, 0.15);
+  margin-bottom: 48px;
+  position: relative;
+}
+
+:global([data-theme="light"]) .paperSheet {
+  box-shadow: 
+    0 4px 24px -4px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* ==========================================================================
+   TYPOGRAPHIC HIERARCHY & DOCUMENT ELEMENTS
+   ========================================================================== */
+
+.docTitle {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0 0 8px 0;
+  color: var(--pv-fg);
+  font-family: var(--pos-font-sans, serif);
+}
+
+.docSubtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  color: var(--pv-fg);
+  opacity: 0.85;
+}
+
+.docH2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 28px 0 12px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--pv-border);
+  color: var(--pv-fg);
+}
+
+.docH3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 18px 0 8px 0;
+  color: var(--pv-fg);
+}
+
+.docParagraph {
+  font-size: 14.5px;
+  line-height: 1.68;
+  margin: 0 0 14px 0;
+  color: var(--pv-fg);
+}
+
+.docDivider {
+  border: none;
+  border-top: 1px solid var(--pv-border);
+  margin: 24px 0;
+}
+
+/* Bulleted and Numbered Lists */
+.docList {
+  margin: 0 0 16px 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.docListItem {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--pv-fg);
+}
+
+/* Skill Tag Badges */
+.skillTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  margin: 0 3px;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: var(--pos-font-mono, monospace);
+  background-color: var(--pv-hover);
+  border: 1px solid var(--pv-border);
+  border-radius: 4px;
+  color: var(--pos-accent-interactive, #0A84FF);
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+:global([data-theme="light"]) .skillTag {
+  background-color: #EAE6DE;
+  border-color: #DAD5CC;
+  color: #0066CC;
+}
+
+/* Architecture Callout Blocks */
+.callout {
+  display: flex;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 6px;
+  border: 1px solid;
+  margin: 20px 0;
+  line-height: 1.6;
+  font-size: 13.5px;
+}
+
+.calloutIcon {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.calloutBody {
+  flex: 1;
+}
+
+.calloutTitle {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+/* Callout Variants */
+.calloutNote {
+  background-color: rgba(10, 132, 255, 0.08);
+  border-color: rgba(10, 132, 255, 0.25);
+  color: var(--pv-fg);
+}
+.calloutNote .calloutTitle,
+.calloutNote .calloutIcon {
+  color: #0A84FF;
+}
+
+.calloutTip {
+  background-color: rgba(48, 209, 88, 0.08);
+  border-color: rgba(48, 209, 88, 0.25);
+  color: var(--pv-fg);
+}
+.calloutTip .calloutTitle,
+.calloutTip .calloutIcon {
+  color: #30D158;
+}
+
+.calloutImportant {
+  background-color: rgba(191, 90, 242, 0.08);
+  border-color: rgba(191, 90, 242, 0.25);
+  color: var(--pv-fg);
+}
+.calloutImportant .calloutTitle,
+.calloutImportant .calloutIcon {
+  color: #BF5AF2;
+}
+
+.calloutWarning {
+  background-color: rgba(255, 159, 10, 0.08);
+  border-color: rgba(255, 159, 10, 0.25);
+  color: var(--pv-fg);
+}
+.calloutWarning .calloutTitle,
+.calloutWarning .calloutIcon {
+  color: #FF9F0A;
+}
+
+.calloutBlockquote {
+  background-color: var(--pv-hover);
+  border-color: var(--pv-border);
+  border-left: 4px solid var(--pos-accent-interactive, #0A84FF);
+  color: var(--pv-fg);
+  font-style: italic;
+}
+
+/* Code Blocks */
+.codeBlockWrapper {
+  margin: 18px 0;
+  border-radius: 6px;
+  border: 1px solid var(--pv-border);
+  background-color: var(--pv-code-bg);
+  overflow: hidden;
+}
+
+.codeBlockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--pv-border);
+  font-family: var(--pos-font-mono, monospace);
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.codeBlockPre {
+  margin: 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-family: var(--pos-font-mono, "JetBrains Mono", monospace);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--pv-fg);
+}
+
+.inlineCode {
+  font-family: var(--pos-font-mono, monospace);
+  font-size: 0.9em;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background-color: var(--pv-hover);
+  border: 1px solid var(--pv-border);
+  color: var(--pv-fg);
+}
+
+.link {
+  color: var(--pos-accent-interactive, #0A84FF);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 120ms ease;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   PRINT / EXPORT TO PDF MEDIA QUERY
+   ========================================================================== */
+
+@media print {
+  /* Hide all OS chrome, toolbars, sidebar */
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+  .toolbar,
+  .sidebar {
+    display: none !important;
+  }
+
+  .paperViewerRoot {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .contentArea {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    background: #FFFFFF !important;
+  }
+
+  .paperSheet {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    min-height: auto !important;
+  }
+
+  .docTitle,
+  .docSubtitle,
+  .docH2,
+  .docH3,
+  .docParagraph,
+  .docListItem {
+    color: #000000 !important;
+  }
+
+  .skillTag {
+    border: 1px solid #CCCCCC !important;
+    background-color: #F0F0F0 !important;
+    color: #000000 !important;
+  }
+
+  .codeBlockWrapper {
+    border: 1px solid #CCCCCC !important;
+    background-color: #F8F8F8 !important;
+  }
+
+  .callout {
+    border: 1px solid #CCCCCC !important;
+    background-color: #F9F9F9 !important;
+  }
+}
